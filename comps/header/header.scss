@@ -1,0 +1,314 @@
+@import "../../styles/variables";
+
+.main-header-outer {
+  background-color : $background-dark-color-primary;
+  box-shadow       : 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  &.static {
+    position : fixed;
+    top      : 0;
+    left     : 0;
+    width    : 100%;
+    z-index  : 4;
+  }
+
+  .containerx {
+    display         : flex;
+    justify-content : space-between;
+    align-items     : center;
+    padding         : 7px 20px;
+    //height          : 60px;
+    margin-right    : auto;
+    margin-left     : auto;
+
+    @media (min-width : 576px) {
+      max-width : 640px;
+    }
+    @media (min-width : 768px) {
+      max-width : 980px;
+    }
+    @media (min-width : 992px) {
+      max-width : 1080px;
+    }
+    @media (min-width : 1200px) {
+      max-width : 1280px;
+    }
+    @media (min-width : 1400px) {
+      max-width : 1380px;
+    }
+
+    @media (max-width : 768px) {
+      //flex-direction : column;
+      //align-items    : flex-start;
+      //padding        : 0;
+    }
+  }
+
+  .left, .right {
+    display     : flex;
+    align-items : center;
+
+    > * {
+      display     : inline-block;
+      margin-left : 10px;
+      font-weight : 400;
+      font-size   : 1.02rem;
+      color       : #fff;
+    }
+  }
+
+  .logo {
+    //height : 100%;
+    cursor : pointer;
+
+    .breadcrumb {
+      display : none;
+    }
+
+    img {
+      max-height : 30px;
+      margin     : 10px;
+    }
+
+  }
+
+}
+
+
+// search container
+.main-header-outer {
+  // container of both
+  .logo + div {
+    display : flex;
+  }
+
+  .search-box {
+    height        : 35px;
+    width         : 320px;
+    padding       : 10px 15px;
+    margin        : 0;
+    border-radius : 0;
+    border        : 0;
+    @media (max-width : 768px) {
+      width : 100%;
+    }
+    @media (min-width : 1400px) {
+      width : 400px;
+    }
+  }
+
+  .search-btn {
+    background-color : white;
+    //color            : $theme-color-secondary;
+    height           : 35px;
+    padding          : 5px 15px;
+    display          : flex;
+    align-items      : center;
+    justify-content  : center;
+    margin-left      : 10px;
+    color            : $theme-color-red;
+  }
+
+  .search-box, .search-btn {
+    border-radius : 0;
+    border        : 0;
+    box-shadow    : -1px 1px 4px rgb(40 3 3 / 40%);
+  }
+}
+
+// right
+.main-header-outer .right {
+  display         : flex;
+  align-items     : center;
+  justify-content : flex-end;
+
+  a {
+    text-transform : uppercase;
+    margin-left    : 20px;
+
+    &:hover {
+      color           : rgba(255, 255, 255, 0.72);
+      text-decoration : none;
+    }
+
+    //&:first-child {
+    //  font-weight : bold;
+    //}
+    &.active {
+      font-weight : bold;
+    }
+  }
+
+  .hotlink {
+    margin-left : 50px;
+  }
+
+  .breadcrumb {
+    //display : none;
+    margin-left : 20px;
+    display     : flex;
+  }
+}
+
+
+// breadcrumb
+.breadcrumb {
+  display          : flex;
+  flex-direction   : column;
+  justify-content  : space-between;
+  align-items      : center;
+  margin-left      : 10px;
+  margin-right     : 10px;
+  width            : 40px;
+  background-color : $theme-color-red;
+  height           : 35px;
+  cursor           : pointer;
+  border-radius    : 5px;
+  padding          : 5px;
+  box-shadow       : 0 0 6px 1px rgb(0 0 0 / 31%);
+
+  .line {
+    display          : inline-block;
+    height           : 5px;
+    border-radius    : 5px;
+    width            : 100%;
+    background-color : #fff;
+    transform-origin : left;
+    //transition:  all 0.3s ease-in-out;
+  }
+
+  &.black {
+    background-color : initial;
+
+    .line {
+      background-color : $theme-color-red;
+    }
+  }
+
+  &.close {
+    $rot : 43deg;
+    $off : 2px;
+
+    .line:first-child {
+      transform : rotate($rot) translateY(-$off) translateX($off);
+    }
+
+    .line:nth-child(2) {
+      opacity : 0;
+    }
+
+    .line:last-child {
+      transform : rotate(-$rot) translateY($off) translateX($off);
+    }
+  }
+}
+
+
+// mobile responsive
+.main-header-outer {
+
+  @media (max-width : 992px) {
+    .right {
+      a, span {
+        display : none;
+      }
+
+      .breadcrumb {
+        display : flex;
+      }
+    }
+  }
+
+  @media (max-width : 768px) {
+    .right {
+      display : none;
+    }
+    .containerx {
+      height  : initial;
+      display : block;
+      padding : 10px;
+    }
+
+    .containerx .left {
+      display        : flex;
+      flex-direction : column;
+
+      > div {
+        width : 100%;
+
+        .search-box {
+          width : 100%;
+        }
+      }
+
+      .breadcrumb {
+        display : flex;
+      }
+
+      .logo {
+        display         : flex;
+        align-items     : center;
+        justify-content : space-between;
+      }
+    }
+  }
+}
+
+// hotline gotcha
+.main-header-outer .containerx {
+
+  @media (min-width : 992px) and (max-width : 1200px) {
+    //max-width: 100%;
+    padding-left : 5px;
+    .logo {
+      margin : 0;
+    }
+    .right .hotlink {
+      display : none;
+    }
+  }
+}
+
+// cart badge
+.main-header-outer .right a.cart {
+  position    : relative;
+  margin-left : 10px;
+
+  .badge {
+    position         : absolute;
+    font-weight      : bold;
+    top              : -7px;
+    right            : -12px;
+    font-size        : 0.7rem;
+    padding          : 1px 6px;
+    line-height      : 17px;
+    border-radius    : 50%;
+    background-color : $theme-color-blue;
+    color            : #fff;
+  }
+}
+
+// mobile responsive header
+.main-header-outer .containerx {
+  @media (max-width : 768px) {
+    padding-top : 4px;
+    .logo {
+      margin-bottom: 5px;
+      img {
+        margin-left : 2px;
+      }
+    }
+
+    .logo + div {
+      display : flex;
+
+      > div {
+        flex : 1;
+      }
+
+      a {
+        margin-right : 10px;
+      }
+    }
+  }
+}

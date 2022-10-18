@@ -1,0 +1,34 @@
+
+
+/* THEME COLORS */
+$theme-color-red                  : #B60C0C;
+$theme-color-blue                 : #113d9b;
+$theme-color-tertiary             : #ffeb3b;
+
+/* DARK COLORS */
+$dark-color-primary               : #262626;
+$dark-color-secondary             : #494949;
+$dark-color-tertiary              : #ffeb3b;
+
+/* LIGHT COLORS */
+$light-color-primary              : #00bcd4;
+$light-color-secondary            : #ff4081;
+$light-color-tertiary             : #ffeb3b;
+
+
+/* BACKGROUND COLORS */
+$background-light-color-primary   : white;
+$background-light-color-secondary : #F3C5C7;
+$background-light-color-tertiary  : #f6f6f6;
+$background-dark-color-primary    : $theme-color-red;
+$background-dark-color-secondary  : $theme-color-blue;
+$background-dark-color-tertiary   : $dark-color-primary;
+
+
+/* DARK TEXT COLORS */
+$dark-text-color-primary          : #171717;
+$dark-text-color-secondary        : $dark-color-secondary;
+$dark-text-color-tertiary         : #222;
+
+/* LIGHT TEXT COLORS */
+$light-text-color-primary         : #fff;

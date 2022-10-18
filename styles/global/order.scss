@@ -1,0 +1,99 @@
+$bgback      : #e7e7e7;
+$bgin        : #ffffff;
+//$bgin: #f5f5f5;
+//$card-shadow: 0 0 10px rgba(105, 105, 105, 0.1);
+$card-shadow : none;
+
+.orders {
+  .single-order {
+    //background: $bgback;
+    background    : none;
+    box-shadow    : 0 0 30px rgba(105, 105, 105, 0.1);
+    border-bottom : 1px solid #e7e7e7;
+    &:last-child{
+      margin-bottom: 50px!important;
+    }
+  }
+}
+
+
+// order item
+.orders .order-item {
+  margin-bottom    : 0;
+  box-shadow       : $card-shadow;
+  padding          : 10px 5px 10px 5px;
+  font-size        : 15px;
+  font-weight      : 600;
+  background-color : $bgin;
+
+  .left {
+    //max-width    : 70%;
+    display      : flex;
+    padding-left : 5px;
+
+    .image {
+      width : 70px;
+
+      img {
+        width : 100%;
+      }
+    }
+
+    .names {
+      margin-top     : 0;
+      margin-left    : 10px;
+      color          : #333;
+      text-transform : capitalize;
+    }
+  }
+
+  .right {
+    p {
+      margin-top    : 0;
+      margin-left   : 0;
+      margin-bottom : 0;
+      color         : #333;
+    }
+
+  }
+}
+
+
+// order info
+.orders .order-info {
+  margin-bottom    : 20px;
+  padding          : 10px 10px 10px 15px;
+  font-size        : 15px;
+  font-weight      : 600;
+  background-color : $bgin;
+  box-shadow       : $card-shadow;
+  align-items      : center;
+}
+
+// order header
+.orders .order-header {
+  display          : flex;
+  justify-content  : space-between;
+  align-items      : center;
+  margin-bottom    : 10px;
+  padding          : 10px 10px 10px 15px;
+  font-size        : 15px;
+  font-weight      : 600;
+  background-color : $bgin;
+  box-shadow       : $card-shadow;
+
+  border-bottom    : 1px solid #e7e7e7;
+
+
+  .status.color-red {
+    color : #DC3545;
+  }
+
+  .status.color-green {
+    color : #198754;
+  }
+
+  .status.color-yellow {
+    color : #FFC107;
+  }
+}

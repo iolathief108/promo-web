@@ -1,0 +1,86 @@
+// popup container
+body .order-popup-content {
+  max-width  : 800px;
+  width      : 800px;
+  box-shadow : #1c1c1c54 1px 1px 10px 2px;
+  max-height : 750px;
+  h4 {
+    font-weight: 500;
+  }
+}
+
+// order popup admin
+.or-det-cont {
+  font-family : "Roboto Medium", sans-serif;
+
+  .frame {
+    background-color : #f5f5f58c;
+    border           : 1px solid #e0e0e0;
+  }
+
+  .frame-2 {
+    margin-left : 10px;
+    width       : initial;
+  }
+
+  .frame-3 {
+    margin-top : 10px;
+  }
+}
+
+// address frame
+.or-det-cont .address {
+  p {
+    font-size     : 0.95rem;
+    line-height   : 1.2rem;
+    font-weight   : 400;
+    font-family   : "Roboto", sans-serif;
+    margin-bottom : 0.4rem;
+  }
+}
+
+// order summary frame
+.or-det-cont .summary {
+  h4 {
+    margin-bottom : 0;
+  }
+
+  .order-time {
+    font-size   : 0.9rem;
+    font-weight : 500;
+    font-family : "Roboto", sans-serif;
+  }
+
+  .border-line {
+    border-bottom : 1px solid #cecece;
+    margin-bottom : 10px;
+    margin-top    : 10px;
+  }
+}
+
+// order item
+.or-det-cont {
+  .order-item {
+
+    background-color : #f5f5f58c;
+    border: 1px solid #cecece;
+    border-top: none;
+
+    &:nth-child(2) {
+      border-top : 1px solid #cecece;
+    }
+  }
+
+  .order-item img {
+     border-radius: 3px;
+  }
+
+  .frame-3 {
+    background-color : transparent;
+    border: none;
+  }
+
+  .order-item > div:not(:first-child) {
+    padding-top:  10px;
+  }
+}

@@ -1,0 +1,136 @@
+@import "/styles/variables";
+
+.citem-outer {
+  margin-bottom  : 10px;
+  padding-bottom : 20px;
+  padding-top    : 10px;
+  border-bottom  : 1px solid lighten($dark-color-primary, 40%);
+
+  &:last-child {
+    border-bottom : none;
+  }
+
+  // image and title
+  .image {
+    position : relative;
+
+    img {
+      width        : 100%;
+      //aspect-ratio : 4/2.5;
+      aspect-ratio : 4/3;
+      object-fit   : cover;
+
+    }
+
+    .name {
+      font-size        : 1.1rem;
+      padding-top      : 1px;
+      padding-bottom   : 3px;
+      margin-bottom    : 10px;
+      position         : absolute;
+      bottom           : 0;
+      left             : 0;
+      width            : 80%;
+      background-color : white;
+      border-radius    : 10px;
+      left             : 10%;
+      text-align       : center;
+      color            : black;
+    }
+
+    @media (min-width : 768px) and (max-width : 991px) {
+      img {
+        height : 100%;
+      }
+      .name {
+        //margin-bottom: 15px;
+        width : 70%;
+        left  : 15%;
+      }
+    }
+  }
+
+  // vairation price qty
+  .var {
+    text-align      : center;
+    display         : flex;
+    flex-direction  : column;
+    align-items     : center;
+    justify-content : center;
+
+    .total {
+      background-color : $background-dark-color-primary;
+      max-width        : 130px;
+      padding-left     : 10px;
+      padding-right    : 10px;
+      color            : white;
+      font-size        : 1.1rem;
+      box-shadow       : 0px 0px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .var-name {
+      font-size     : 1.2rem;
+      margin-top    : 7px;
+      margin-bottom : 7px;
+    }
+  }
+
+  .qtyva {
+    display : flex;
+
+    .value {
+      display       : inline;
+      box-shadow    : 1px 1px 6px 0px #2626263d;
+      padding       : 4px 20px;
+      border-radius : 10px;
+    }
+
+    button {
+      border           : none;
+      background-color : transparent;
+      font-size        : 1.2rem;
+      font-weight      : bold;
+      color            : $dark-color-primary;
+      cursor           : pointer;
+      outline          : none;
+
+      &:nth-child(1) {
+        font-size   : 1.8rem;
+        line-height : 20px;
+        //padding-top: 10px;
+        font-weight : 500;
+      }
+    }
+  }
+}
+
+
+// add to cart
+.citem-outer .total {
+  display        : flex;
+  flex-direction : column;
+
+  max-width      : 145px;
+
+  .item-total {
+    height          : 100%;
+    margin-bottom   : 13px;
+    box-shadow      : -2px 1px 8px rgba(0, 0, 0, 0.5);
+    display         : flex;
+    justify-content : center;
+    align-items     : center;
+    color           : $theme-color-red;
+    font-weight     : 600;
+    font-size       : 1.1rem;
+  }
+
+  .remove-btn {
+    background-color : $background-dark-color-tertiary;
+    color            : white;
+    font-size        : 1.1rem;
+    padding          : 4px 10px;
+    box-shadow       : 0px 0px 10px rgba(0, 0, 0, 0.5);
+    cursor           : pointer;
+    outline          : none;
+  }
+}

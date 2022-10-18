@@ -1,0 +1,118 @@
+@import "/styles/variables";
+
+html,
+body {
+  padding     : 0;
+  margin      : 0;
+  font-family : -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-size   : 16px;
+}
+
+a {
+  color           : inherit;
+  text-decoration : none;
+}
+
+* {
+  box-sizing : border-box;
+}
+
+ul {
+  //padding    : 0;
+  //margin     : 0;
+  //list-style : none;
+}
+
+a {
+  //color       : #2ba5cb;
+  color: $theme-color-red;
+  font-weight : 600;
+  cursor      : pointer;
+
+  &:hover {
+    color: darken($theme-color-red, 10%);
+    //color           : #1b809f;
+    //text-decoration : underline;
+  }
+}
+
+@import "../variables";
+
+html {
+  //color-scheme : light;
+}
+
+body {
+  color       : $dark-text-color-primary;
+  background  : white;
+  overflow-y  : scroll;
+  font-family : "Nunito Sans", sans-serif;
+  @media (min-width : 1300px) {
+    overflow-x : hidden;
+  }
+}
+
+// typo
+h1 {
+  font-size     : 2.5rem;
+  font-weight   : 900;
+  margin-bottom : 1rem;
+}
+
+h2 {
+  font-size     : 1.8rem;
+  font-weight   : 600;
+  margin-bottom : 1rem;
+}
+
+h3 {
+  font-size     : 1.5rem;
+  font-weight   : 800;
+  margin-bottom : 1rem;
+}
+
+h4 {
+  font-size     : 1.25rem;
+  font-weight   : 700;
+  margin-bottom : 1rem;
+}
+
+h5 {
+  font-size     : 1rem;
+  font-weight   : 700;
+  margin-bottom : 1rem;
+}
+
+h6 {
+  font-size     : 0.75rem;
+  font-weight   : 700;
+  margin-bottom : 1rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Roboto", sans-serif;
+}
+
+
+.loader > div {
+
+  margin : auto auto 49px;
+}
+
+@import "sidenav";
+@import "bar";
+@import "admin-form";
+@import "admin-home";
+@import "inputs";
+@import "home";
+@import "sidebar";
+@import "checkout";
+@import "pr-create";
+@import "checkbox";
+@import "admin-order";
+@import "override";
+@import "order";
+@import "admin-order-popup";
+
+

@@ -1,0 +1,55 @@
+@import "/styles/variables";
+
+.checksum {
+
+  .title-container {
+    background-color : $background-dark-color-primary;
+    text-align       : center;
+    padding          : 10px 10px;
+    border-radius    : 15px;
+    margin-bottom    : 10px;
+
+    span {
+      color     : $light-text-color-primary;
+      font-size : 1.5em;
+    }
+  }
+
+  .content-wrap > div {
+
+    span {
+      height         : 100%;
+      display        : inline-block;
+      text-align     : center;
+      width          : 100%;
+      vertical-align : middle;
+      font-size      : 1.3rem;
+    }
+    .white-bg {
+      background-color : $background-light-color-primary;
+    }
+    > div, a {
+      border-radius : 10px;
+      box-shadow    : 2px 0 10px rgba(0, 0, 0, 0.2);
+      padding       : 10px;
+      height        : 100%;
+    }
+    > a {
+      padding          : 0;
+      background-color : $background-dark-color-secondary;
+      display          : flex;
+      justify-content  : center;
+      align-items      : center;
+      color            : white;
+      &:hover {
+        background-color : darken($background-dark-color-secondary, 10%);
+        text-decoration  : none;
+      }
+      span {
+        height : initial;
+        width  : initial;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,59 @@
+@import "../variables";
+
+// input type text
+input {
+  border             : none;
+  box-sizing         : border-box;
+  -moz-box-sizing    : border-box;
+  -webkit-box-sizing : border-box;
+}
+
+input:not([type="file"]), textarea {
+  outline          : none;
+  font-size        : 1rem;
+  color            : $dark-text-color-primary;
+  background-color : $background-light-color-primary;
+  border           : 1px solid rgba(122, 122, 122, 0.23);
+  border-radius    : 3px;
+  box-shadow       : 0px 2px 5px 0px rgb(122 122 122 / 10%);
+  padding          : 4px 10px;
+  margin           : 10px 10px 10px 0;
+
+  &:focus {
+    //border : 1px solid $dark-color-primary;
+  }
+}
+
+// clear button styles
+button {
+  //border           : none;
+  outline          : none;
+  padding          : 3px 18px;
+
+  font-size        : 1rem;
+  border-radius    : 3px;
+  cursor           : pointer;
+  color            : $dark-text-color-primary;
+  margin-right     : 10px;
+  box-shadow       : 0 2px 5px 0 rgb(122 122 122 / 10%);
+  border           : 1px solid rgba(122, 122, 122, 0.23);
+  background-color : $background-light-color-primary;
+
+  &[disabled] {
+    opacity : 0.5;
+    cursor  : not-allowed;
+  }
+
+  &:hover {
+    //background-color : $dark-color-primary;
+  }
+}
+
+.red-btn {
+  background-color : $theme-color-red !important;
+  color            : $light-text-color-primary !important;
+}
+.blue-btn {
+  background-color : $theme-color-blue;
+  color            : $light-text-color-primary;
+}

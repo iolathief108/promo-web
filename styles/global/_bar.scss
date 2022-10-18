@@ -1,0 +1,28 @@
+.dev-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    background: #fafafa;
+    font-size: 1.1rem;
+    color: #333;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    a {
+        color: #333;
+        text-decoration: none;
+        margin-right: 2rem;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    @media (prefers-color-scheme: dark) {
+        background: #333;
+        color: #fafafa;
+        a {
+        color: #fafafa;
+        }
+    }
+}

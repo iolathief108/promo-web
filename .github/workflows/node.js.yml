@@ -1,0 +1,45 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    env:
+      ENV: staging
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      ZOHO_USER: ${{ secrets.ZOHO_USER }}
+      ZOHO_PASS: ${{ secrets.ZOHO_PASS }}
+      NEW_ORDER_EMAIL: ${{ secrets.NEW_ORDER_EMAIL }}
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'yarn'
+        cache-dependency-path: '**/yarn.lock'
+    - name: Next Cache
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.npm
+          ${{ github.workspace }}/.next/cache
+        key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+        restore-keys: |
+          ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+    - run: yarn
+    - run: yarn generate
+    - run: yarn build
+    - run: pm2 restart all --update-env

@@ -1,0 +1,72 @@
+@import "/styles/variables";
+
+.checkout-container {
+  .sumline div:last-child {
+    text-align  : right;
+    white-space : nowrap;
+  }
+
+  .sumline div:nth-child(2) {
+    white-space : nowrap;
+    text-align  : right;
+  }
+
+  .right {
+    //background-color: $background-light-color-tertiary;
+    box-shadow    : 0px 1px 7px 0px rgba(164, 164, 164, 0.2);
+    border-radius : 3px;
+    margin-bottom : 10px;
+    margin-top    : 10px;
+    padding       : 15px;
+    height        : 100%;
+
+    .line {
+      // dot line
+      border-bottom: 1px dashed lighten($dark-color-primary, 60%);
+      margin-bottom: 20px;
+    }
+
+    .label {
+      font-weight : 600;
+    }
+
+    input[type="submit"] {
+      margin-top       : 20px;
+      margin-bottom    : 10px;
+
+      // paynow button
+      background-color : $background-dark-color-primary;
+      color            : $light-text-color-primary;
+      border-radius    : 5px;
+      padding          : 7px 15px;
+      width            : 100%;
+      font-size        : 1.2em;
+      font-weight      : 600;
+      border           : none;
+      cursor           : pointer;
+      transition       : all 0.05s ease-in-out;
+
+      &:hover:not(.disabled) {
+        background-color : darken($background-dark-color-primary, 5%);
+      }
+
+        &.disabled {
+            background-color : #f6f6f6;
+            color            : $dark-text-color-primary;
+            cursor: initial;
+        }
+    }
+  }
+
+  .form-group {
+    margin-right : 20px;
+  }
+
+  .form-group label {
+    margin-top : 20px;
+
+    &:first-child {
+      margin-top : 0;
+    }
+  }
+}

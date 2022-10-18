@@ -1,0 +1,198 @@
+@import "/styles/variables";
+
+.pcard-outer {
+  //margin-bottom  : 10px;
+  padding-bottom : 12px;
+  padding-top    : 10px;
+  border-bottom  : 1px solid lighten($dark-color-primary, 70%);
+
+  &:last-child {
+    border-bottom : none;
+  }
+
+  // image and title
+  .image {
+    position : relative;
+
+    img, .image-container > span {
+      width         : 100%;
+      //aspect-ratio : 4/2.5;
+      aspect-ratio  : 4/3;
+      //aspect-ratio : 4/3.3;
+      //aspect-ratio: 1/1;
+      object-fit    : cover;
+      border-radius : 5px;
+
+    }
+
+    .name {
+      font-size        : 1.1rem;
+      font-weight      : 600;
+      padding-top      : 1px;
+      padding-bottom   : 1px;
+      margin-bottom    : 7px;
+      position         : absolute;
+      bottom           : 0;
+      width            : 80%;
+      background-color : #f6f6f6;
+      border-radius    : 10px;
+      left             : 10%;
+      text-align       : center;
+      color            : black;
+    }
+
+    @media (min-width : 768px) and (max-width : 991px) {
+      img, .image-container > span {
+        height : 100%;
+      }
+      .name {
+        //margin-bottom: 15px;
+        width : 70%;
+        left  : 15%;
+      }
+    }
+  }
+
+  // vairation price qty
+  .var {
+    text-align      : center;
+    display         : flex;
+    flex-direction  : column;
+    align-items     : center;
+    justify-content : center;
+
+    .total {
+      background-color : $background-dark-color-primary;
+      max-width        : 180px;
+      min-width        : 105px;
+      padding-left     : 10px;
+      padding-right    : 10px;
+      color            : white;
+      font-size        : 1.1rem;
+      box-shadow       : -1px 1px 5px rgb(56 3 3 / 70%);
+    }
+
+    .var-name {
+      font-size     : 1.2rem;
+      margin-top    : 7px;
+      margin-bottom : 7px;
+    }
+  }
+
+  .qtyva {
+    display : flex;
+
+    &.disabled {
+      opacity : 0.5;
+    }
+
+    .value {
+      display       : inline;
+      box-shadow    : -1px 1px 4px 0px rgb(38 38 38 / 42%);
+      padding       : 4px 20px;
+      border-radius : 10px;
+    }
+
+    button {
+      border           : none;
+      box-shadow       : none;
+      background-color : transparent;
+      font-size        : 1.2rem;
+      font-weight      : bold;
+      color            : $dark-color-primary;
+      cursor           : pointer;
+      outline          : none;
+
+      &:nth-child(1) {
+        font-size   : 1.8rem;
+        line-height : 20px;
+        //padding-top: 10px;
+        font-weight : 500;
+      }
+    }
+  }
+}
+
+
+// add to cart
+.pcard-outer .atc {
+  display        : flex;
+  flex-direction : column;
+  max-width      : 155px;
+  margin-left    : auto;
+  @media (max-width : 575px) {
+    margin-left  : auto;
+    margin-right : auto;
+  }
+
+
+  .item-total {
+    height          : 100%;
+    margin-bottom   : 13px;
+    box-shadow      : -2px 2px 6px rgb(0 0 0 / 28%);
+    display         : flex;
+    justify-content : center;
+    align-items     : center;
+    color           : $theme-color-red;
+    font-weight     : 600;
+    font-size       : 1.1rem;
+  }
+
+  .atc-btn {
+    background-color : $background-dark-color-tertiary;
+    color            : white;
+    font-size        : 1.1rem;
+    padding          : 4px 10px;
+    box-shadow       : -2px 1px 5px rgb(58 58 58 / 74%);
+    cursor           : pointer;
+    outline          : none;
+    width            : 100%;
+  }
+}
+
+
+// product cart image hover effect
+@media (min-width : 768px) {
+
+  .pcard-outer .image {
+
+    .name, img, .image-container > span {
+      transition : all 0.18s ease;
+    }
+
+    &:hover {
+      .name, img, .image-container > span {
+        transition-delay: 420ms;
+      }
+      z-index : 10;
+
+      .name {
+        opacity : 0;
+      }
+      .image-container > {
+        img,  span {
+          transform     : scale(1.75);
+          box-shadow    : -1px 1px 17px rgb(104 104 104 / 35%);
+          border-radius : 0;
+        }
+      }
+    }
+  }
+
+  .home-container {
+    .pcard-outer .image {
+      &:hover .image-container > {
+        img,  span {
+          transition-delay: 420ms;
+          transform : scale(1.31);
+        }
+      }
+    }
+  }
+
+}
+
+
+.pcard-outer .image .image-container > span {
+  display: block !important;
+}

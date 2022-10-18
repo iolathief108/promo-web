@@ -1,0 +1,81 @@
+@import "/styles/variables";
+
+.cats-outer {
+  .cats-inner {
+    display         : flex;
+    justify-content : center;
+    padding-top     : 12px;
+    //on moblie
+    @media (max-width: 567px) {
+      background-color: #fff6f6;
+    }
+
+    img, .item {
+      transition : all 0.2s ease-in-out;
+      transform  : scale(1);
+    }
+
+    .item {
+      text-align : center;
+
+      &.active {
+        cursor      : initial;
+
+        img {
+          //transform : scale(0.91);
+          //border    : rgba(0, 0, 0, 0.23) solid 1px;
+        }
+
+        //color : $dark-text-color-secondary;
+        .name {
+          //color : $theme-color-primary;
+          color : lighten($dark-text-color-primary, 40%);
+          font-weight : normal;
+        }
+        //font-weight : 400;
+      }
+
+      .name {
+        color : $dark-text-color-primary;
+
+      }
+
+      &:hover {
+        text-decoration : none;
+
+        &:not(.active) {
+          img {
+            //transform : scale(1.03);
+          }
+          .name {
+
+            color: $theme-color-red;
+          }
+        }
+      }
+
+      img {
+        max-width     : 95px;
+        max-height    : 95px;
+        border-radius : 50%;
+      }
+
+      display    : inline-block;
+      margin     : 10px;
+    }
+
+  }
+
+  @media (max-width : 576px) {
+    overflow-x : auto;
+    .wrap {
+      width      : 540px;
+      overflow-x : visible;
+
+      .cats-inner .item img {
+        max-width  : 70px;
+        max-height : 71px;
+      }
+    }
+  }
+}
