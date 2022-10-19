@@ -71,7 +71,7 @@ function RealHeader() {
         }>
             <Head>
                 <title>
-                    NeatKitch - We have everything you need to make your kitchen perfect!
+                    Promo Solutions (Pvt) Ltd - All the printing needs under one company!
                 </title>
             </Head>
             <div className={'bg-white pt-2'}/>
@@ -80,7 +80,8 @@ function RealHeader() {
                     <div className={'logo'}>
                         <Link href="/">
                             <img
-                                src="/logo-white.png"
+                                // src="/logo-white.png"
+                                src="/static/slice1.png"
                                 alt="logo"/>
                         </Link>
                         <Breadcrumb noRes={true}/>
@@ -103,13 +104,6 @@ function RealHeader() {
                            Gallery
                         </a>
                     </Link>
-                    <Link href="/contact">
-                        <a className={
-                            router.pathname === '/contact' ? 'active' : ''
-                        }>
-                            Contact
-                        </a>
-                    </Link>
                     <Link href={'/about'}>
                         <a className={
                             router.pathname === '/about' ? 'active' : ''
@@ -117,8 +111,15 @@ function RealHeader() {
                             About
                         </a>
                     </Link>
+                    <Link href="/contact">
+                        <a className={
+                            router.pathname === '/contact' ? 'active' : ''
+                        }>
+                            Contact
+                        </a>
+                    </Link>
 
-                    <span className={'hotlink'}>HOTLINE: +65 0000 000</span>
+                    <span className={'hotlink'}>HOTLINE: +94 77 858 0000</span>
                     <Breadcrumb noRes={true}/>
                 </div>
             </div>

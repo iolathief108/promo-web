@@ -38,6 +38,19 @@ export function Footer() {
             <div className={'footer'}>
                 <div className="container fs-6 pt-1 pb-2">
                     <div className={'row px-md-6'}>
+                        <div className={'col-6 col-md-3 me-3'}>
+                            <div className={'logo'}>
+                                <Link href="/">
+                                    <img
+                                        src="/static/slice1.png"
+                                        alt="logo"/>
+                                </Link>
+                            </div>
+                            <p className={'mt-3'}>
+                                All printing solutions under one roof
+                            </p>
+                        </div>
+
                         <div className={'col-6 col-md-2'}>
                             <SingleCol title={'Links'} links={[
                                 {
@@ -53,50 +66,47 @@ export function Footer() {
                                     href: '/contact',
                                 },
                                 {
+                                    name: 'Gallery',
+                                    href: '/gallery'
+                                },
+                                {
                                     name: 'Privacy Policy',
                                     href: '/privacy',
-                                },
+                                }
                             ]}/>
                         </div>
+
                         <div className={'col-6 col-md-2'}>
-                            <SingleCol title={'Account'} links={[
-                                {
-                                    name: 'Orders',
-                                    href: '/orders',
-                                },
-                                {
-                                    name: 'Profile',
-                                    href: '/profile',
-                                },
-                                {
-                                    name: 'Cart',
-                                    href: '/cart',
-                                },
-                                {
-                                    name: 'Checkout',
-                                    href: '/checkout',
-                                },
-                            ]}/>
+                            <h5 className={'mb-3'}>
+                                Office
+                            </h5>
+                            <p>
+                                No: 09, <br/>
+                                Joseph Lane, <br/>
+                                Colombo 04, <br/>
+                                Sri Lanka.
+                            </p>
                         </div>
+
                         <div className={'col-12 col-md-4 col-lg-3 ms-auto ps-xl-6'}>
                             <div className={'logo'}>
-                                <Link href="/">
-                                    <img
-                                        src="/logo-white.png"
-                                        alt="logo"/>
-                                </Link>
+                                {/*<Link href="/">*/}
+                                    {/*<img*/}
+                                    {/*    src="/static/slice1.png"*/}
+                                    {/*    alt="logo"/>*/}
+                                {/*</Link>*/}
                             </div>
                             <div className={'social mt-3'}>
-                                {/*<span className={'me-2'}>Follow us: </span>*/}
-                                <a className={'me-4'} href={'https://www.facebook.com/'} target={'_blank'}>
+                                <span className={'me-2'}>Connect us: </span>
+                                <a className={'me-4'} href={'https://www.facebook.com/profile.php?id=100072962686354'} target={'_blank'}>
                                     <i className="fab fa-facebook-f"/>
                                 </a>
                                 <a className={'me-4'} href={'https://www.instagram.com/'} target={'_blank'}>
                                     <i className="fab fa-instagram"/>
                                 </a>
-                                <a className={'me-3'} href={'https://www.twitter.com/'} target={'_blank'}>
-                                    <i className="fab fa-twitter"/>
-                                </a>
+                                {/*<a className={'me-3'} href={'https://www.twitter.com/'} target={'_blank'}>*/}
+                                {/*    <i className="fab fa-twitter"/>*/}
+                                {/*</a>*/}
                             </div>
 
                             <div className={'payment mt-2'}>
@@ -122,7 +132,7 @@ function FooterBottom() {
                 <div className={'text-center mb-0 mt-2 py-2'}>
                     <small>
                         {/*Neatkitch 2022, All Rights Reserved*/}
-                        <span>Neatkitch
+                        <span>Promo Solutions (Pvt) Ltd
                             {/*&copy; */}
                             <span>&nbsp;</span>
                             {new Date().getFullYear()},</span>

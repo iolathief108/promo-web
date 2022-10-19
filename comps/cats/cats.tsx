@@ -24,7 +24,7 @@ function CategoryItem({category}: {category: Category}) {
                 <img height={150} width={150} src={getImageUrl(category.imageId)} alt={category.name}
                      className={'image'}/>
                 <div className={'name'} style={{
-                    whiteSpace: 'nowrap',
+                    // whiteSpace: 'nowrap',
                 }}>{category.name}</div>
             </>
         );

@@ -30,24 +30,31 @@ const Contact: NextPage = () => {
                     marginRight: hasHydrated ? searchContainerMargin : 0,
                 }}>
                     <h1>Get in touch with us!</h1>
-                    <p>We at NeatKitch have the best quality vegetables, fruits and other kitchen items. If you have any
-                        questions or queries, please do not hesitate to contact us. We will be happy to help you.
+                    <p>Welcome to Promo Solutions (Pvt) Ltd.! We are your one-stop shop for all your printing needs.
+                        From custom printed paper bags to shopping bags and non-woven bags, we have it all! We also sell
+                        printing equipment so you can get the perfect print every time!
                     </p>
 
                     <h3>General questions or concerning orders</h3>
                     <p>If you need to get in touch with us for general questions or concerning orders, please email us
                         at:</p>
-
-                    {/*    email*/}
                     <p>
-                        <a href="mailto:info@neatkitch.com">
-                            info@neatkitch.com
+                        <a href="mailto:info@promosolutions.lk">
+                            info@promosolutions.lk
                         </a>
                     </p>
-                    {/*<p>Or call us at:</p>*/}
+                    <p>Or call us at:</p>
 
-                    {/*<p><a href="tel:+44 (0)20 7891 9999">+44 (0)20 7891 9999</a></p>*/}
-                    <p>We will get back to you as soon as possible. Thank you for your interest in NeatKitch!</p>
+                    <p><a href="tel:+94778580000">+94 77 858 0000</a></p>
+                    <p>We will get back to you as soon as possible. Thank you for your interest in Promo Solutions (Pvt) Ltd!</p>
+
+                    <h3>Adress</h3>
+                    <p>Address:
+                        No: 09,
+                        Joseph Lane,
+                        Colombo 04,
+                        Sri Lanka.
+                    </p>
                 </div>
             </Container>
             <Background withMargin align={'right'} bg={'/static/images/right-bg.jpg'}/>

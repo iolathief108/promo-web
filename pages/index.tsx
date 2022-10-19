@@ -86,7 +86,8 @@ const Home: NextPage<Props> = (props) => {
 
             <Container className="container home-container">
                 <Cats/>
-                <h1 className={'text-center fw-bold mt-3'}>Welcome to Promo Solutions (Pvt) Ltd!</h1>
+                <h1 className={'text-center fw-bold mt-3 mb-0'}>Welcome to Promo Solutions (Pvt) Ltd!</h1>
+                <p className={'text-center opacity-75'}>(all printing solutions under one company)</p>
                 <HomeSlider/>
                 {/*<Dod/>*/}
                 <div className={'mt-5'}
@@ -130,8 +131,9 @@ const Home: NextPage<Props> = (props) => {
                     <div className={'mb-5'}/>
                 </div>
 
-                <Background align={'left'} bg={'/static/images/home-bg/left-bg4.png'}/>
-                <Background align={'right'} bg={'/static/images/home-bg/right-bg3.png'}/>
+                <Background align={'left'} bg={'/static/newbg/left-bg4.png'}/>
+                <Background align={'right'} bg={'/static/newbg/right-bg4.png'}/>
+                {/*<Background align={'right'} bg={'/static/images/home-bg/right-bg3.png'}/>*/}
             </Container>
         </>
     );

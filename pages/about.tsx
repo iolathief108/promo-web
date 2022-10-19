@@ -37,17 +37,22 @@ const About: NextPage = () => {
                 }}>
                     <h1>About Us</h1>
                     <p>
-                        Promo Solutions (Pvt) Ltd was established in year 2022 as a trading company, which is expanded into manufacturing packaging materials.
+                        Promo Solutions (Pvt) Ltd was established in year 2022 as a trading company, which is expanded
+                        into manufacturing packaging materials.
                     </p>
                     <p>
                         Thank you for your interest in Promo Solutions!
                     </p>
                     <h2>Environment Policy</h2>
                     <p>
-                        We are committed to the protection of the environment and the health and safety of our employees, customers, and the public. We will comply with all applicable environmental laws and regulations and will strive to exceed them where possible.
+                        We are committed to the protection of the environment and the health and safety of our
+                        employees, customers, and the public. We will comply with all applicable environmental laws and
+                        regulations and will strive to exceed them where possible.
                     </p>
                     <p>
-                        We will continually improve our environmental performance by setting and reviewing environmental objectives and targets, and by implementing and maintaining an effective environmental management system.
+                        We will continually improve our environmental performance by setting and reviewing environmental
+                        objectives and targets, and by implementing and maintaining an effective environmental
+                        management system.
                     </p>
                     <p>
                         <strong>Our environmental objectives are:</strong>
@@ -62,7 +67,8 @@ const About: NextPage = () => {
 
                     <h2>Quality Policy</h2>
                     <p>
-                        We at Promo Solutions are committed to provide our customers with quality products and services that meet their requirements and expectations. We will achieve this by:
+                        We at Promo Solutions are committed to provide our customers with quality products and services
+                        that meet their requirements and expectations. We will achieve this by:
                     </p>
                     <ul>
                         <li>01. Non Woven Related Products</li>
@@ -77,8 +83,75 @@ const About: NextPage = () => {
                         <li>10. online marketing</li>
                     </ul>
                     <p>
-                    that will consistently meet  customer expectations for quality, service. delivery and satisfy the requirements of other stake holders as per the strategic direction of the organization.
+                        that will consistently meet customer expectations for quality, service. delivery and satisfy the
+                        requirements of other stake holders as per the strategic direction of the organization.
                     </p>
+
+                    <h2>Our Delivery Areas</h2>
+                    <div>
+                        <div className="row">
+                            <div className="col-md-4">
+                                <ul>
+                                    <li>Colombo</li>
+                                    <li>Kollupitiya</li>
+                                    <li>Wellawatta</li>
+                                    <li>Bambalapitiya</li>
+                                    <li>Dehiwala</li>
+                                    <li>Borella</li>
+                                    <li>Maharagama</li>
+                                    <li>Rathmalana</li>
+                                    <li>Panadura</li>
+                                    <li>Kalutara</li>
+                                    <li>Beruwala</li>
+                                    <li>Aluthgama</li>
+                                    <li>Galle</li>
+                                    <li>Hambantota</li>
+                                    <li>Gampaha</li>
+                                    <li>Negombo</li>
+                                </ul>
+                            </div>
+                            <div className="col-md-4">
+                                <ul>
+                                    <li>Katunayake</li>
+                                    <li>Seeduwa</li>
+                                    <li>Ja-Ela</li>
+                                    <li>Mabola</li>
+                                    <li>Wattala</li>
+                                    <li>Kegalla</li>
+                                    <li>Mawanella</li>
+                                    <li>Kandy</li>
+                                    <li>Katugastota</li>
+                                    <li>Matale</li>
+                                    <li>Akurana</li>
+                                    <li>Anuradapura</li>
+                                    <li>Trincomalee</li>
+                                    <li>Kurunegala</li>
+                                    <li>Polonnaruwa</li>
+                                    <li>Puttalam</li>
+                                </ul>
+                            </div>
+                            <div className="col-md-4">
+                                <ul>
+                                    <li>Chilaw</li>
+                                    <li>Jaffna</li>
+                                    <li>Kilinochchi</li>
+                                    <li>Mullaithivu</li>
+                                    <li>Mannar</li>
+                                    <li>Vavuniya</li>
+                                    <li>Batticaloa</li>
+                                    <li>Ampara</li>
+                                    <li>Ratnapura</li>
+                                    <li>Monaragala</li>
+                                    <li>Nuwara Eliya</li>
+                                    <li>Hatton</li>
+                                    <li>Thalawakele</li>
+                                    <li>Bandarawela</li>
+                                    <li>Welimada</li>
+                                    <li>Badulla</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </Container>
             <Background withMargin align={'right'} bg={'/static/images/right-bg.jpg'}/>

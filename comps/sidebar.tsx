@@ -18,52 +18,57 @@ export function Sidebar() {
                     <Breadcrumb forceClose black/>
                     <div className={'sidebar-content'}>
                         <ul>
-                                <Link href="/">
-                            <li>
+                            <Link href="/">
+                                <li>
                                     <a>Home</a>
-                            </li>
-                                </Link>
-                                <Link href="/about">
-                            <li>
+                                </li>
+                            </Link>
+                            <Link href="/gallery">
+                                <li>
+                                    <a>Gallery</a>
+                                </li>
+                            </Link>
+                            <Link href="/about">
+                                <li>
                                     <a>About</a>
-                            </li>
-                                </Link>
-                                <Link href="/contact">
-                            <li>
+                                </li>
+                            </Link>
+                            <Link href="/contact">
+                                <li>
                                     <a>Contact</a>
-                            </li>
-                                </Link>
-                                <Link href="/cart">
-                            <li>
-                                    <a>Cart</a>
-                            </li>
-                                </Link>
-                            {
-                                !id && hasHydrated && (
-                                        <Link href="/login">
-                                    <li>
-                                            <a>Login</a>
-                                    </li>
-                                        </Link>
-                                )
-                            }
-                            {
-                                id && hasHydrated && (
-                                    <>
-                                        <h4 className={'ms-2 mt-5 mb-2'}>{firstName} {lastName}</h4>
-                                            <Link href="/profile">
-                                        <li className={''}>
-                                                <a>Profile</a>
-                                        </li>
-                                            </Link>
-                                            <Link href="/orders">
-                                        <li>
-                                                <a>Orders</a>
-                                        </li>
-                                            </Link>
-                                    </>
-                                )
-                            }
+                                </li>
+                            </Link>
+                            {/*<Link href="/cart">*/}
+                            {/*    <li>*/}
+                            {/*        <a>Cart</a>*/}
+                            {/*    </li>*/}
+                            {/*</Link>*/}
+                            {/*{*/}
+                            {/*    !id && hasHydrated && (*/}
+                            {/*        <Link href="/login">*/}
+                            {/*            <li>*/}
+                            {/*                <a>Login</a>*/}
+                            {/*            </li>*/}
+                            {/*        </Link>*/}
+                            {/*    )*/}
+                            {/*}*/}
+                            {/*{*/}
+                            {/*    id && hasHydrated && (*/}
+                            {/*        <>*/}
+                            {/*            <h4 className={'ms-2 mt-5 mb-2'}>{firstName} {lastName}</h4>*/}
+                            {/*            <Link href="/profile">*/}
+                            {/*                <li className={''}>*/}
+                            {/*                    <a>Profile</a>*/}
+                            {/*                </li>*/}
+                            {/*            </Link>*/}
+                            {/*            <Link href="/orders">*/}
+                            {/*                <li>*/}
+                            {/*                    <a>Orders</a>*/}
+                            {/*                </li>*/}
+                            {/*            </Link>*/}
+                            {/*        </>*/}
+                            {/*    )*/}
+                            {/*}*/}
                         </ul>
 
 

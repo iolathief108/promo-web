@@ -2,7 +2,7 @@ import frontState from '../states/front';
 import {useSnapshot} from 'valtio';
 import React, {useEffect} from 'react';
 import {Footer} from './footer/footer';
-import TawkTo from 'tawkto-react';
+// import TawkTo from 'tawkto-react';
 import {tawkConfig} from '../lib/config';
 import {getCategories} from '../lib/fetcher';
 
@@ -22,13 +22,11 @@ export function Container(props: ContainerProps) {
         if (typeof window !== 'undefined') {
 
             if (mainBannerLoaded || noDodLoaded > 3 && !isTawkLoaded) {
-                setTimeout(() => {
-                    new TawkTo(tawkConfig.propertyId, tawkConfig.tawkId);
-                    setIsTawkLoaded(true);
-                }, 4000);
+                // setTimeout(() => {
+                //     new TawkTo(tawkConfig.propertyId, tawkConfig.tawkId);
+                //     setIsTawkLoaded(true);
+                // }, 4000);
             }
-            // const tawk = new TawkTo(tawkConfig.propertyId, tawkConfig.tawkId);
-            // tawk.hideWidget()
         }
     }, [mainBannerLoaded, noDodLoaded]);
 

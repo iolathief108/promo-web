@@ -6,8 +6,8 @@
     justify-content : center;
     padding-top     : 12px;
     //on moblie
-    @media (max-width: 567px) {
-      background-color: #fff6f6;
+    @media (max-width : 567px) {
+      background-color : #fff6f6;
     }
 
     img, .item {
@@ -18,20 +18,30 @@
     .item {
       text-align : center;
 
+      &:hover {
+        img {
+          transform : scale(1.4);
+          box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+          z-index: 10;
+        }
+      }
+
       &.active {
-        cursor      : initial;
+        cursor : initial;
 
         img {
           //transform : scale(0.91);
           //border    : rgba(0, 0, 0, 0.23) solid 1px;
+
         }
 
         //color : $dark-text-color-secondary;
         .name {
           //color : $theme-color-primary;
-          color : lighten($dark-text-color-primary, 40%);
+          color       : lighten($dark-text-color-primary, 40%);
           font-weight : normal;
         }
+
         //font-weight : 400;
       }
 
@@ -47,9 +57,10 @@
           img {
             //transform : scale(1.03);
           }
+
           .name {
 
-            color: $theme-color-red;
+            color : $theme-color-red;
           }
         }
       }
