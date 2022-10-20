@@ -2,6 +2,7 @@
 
 .main-header-outer {
   background-color : $background-dark-color-primary;
+  //background-color : white;
   box-shadow       : 0 2px 4px rgba(0, 0, 0, 0.1);
 
   &.static {
@@ -16,10 +17,12 @@
     display         : flex;
     justify-content : space-between;
     align-items     : center;
-    padding         : 7px 20px;
+    padding         : 13px 20px;
     //height          : 60px;
     margin-right    : auto;
     margin-left     : auto;
+
+    //padding
 
     @media (min-width : 576px) {
       max-width : 640px;
@@ -60,6 +63,8 @@
   .logo {
     //height : 100%;
     cursor : pointer;
+    transform: scale(1.3);
+    margin-right: 20px;
 
     .breadcrumb {
       display : none;
@@ -67,7 +72,7 @@
 
     img {
       max-height : 30px;
-      margin     : 10px;
+      margin     : 0;
     }
 
   }

@@ -9,6 +9,7 @@
     "migrate": "prisma migrate dev --name init1",
     "generate": "prisma generate",
     "studio": "prisma studio",
+    "dotenv": "node ./create-env.js",
     "bla": "node ./temp.js"
   },
   "dependencies": {

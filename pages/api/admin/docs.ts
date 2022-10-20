@@ -96,6 +96,7 @@ export default async (req: NextApiRequest & {files: any;}, res: NextApiResponse)
         dod4ProductId = parseInt(dod4ProductId);
 
         if (shippingCharge && typeof shippingCharge === 'number') {
+
             await prisma.document.upsert({
                 where: {
                     key: 'shippingCharge',

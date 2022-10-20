@@ -217,7 +217,14 @@ export const searchActions = {
             }
             // pin stuff end
 
-            products.products[0].isFirst = true;
+            if (!products.products[0]) {
+                // products.products[0] = {
+                //     isFirst: true
+                // }
+            } else {
+                products.products[0].isFirst = true;
+            }
+
 
             searchState.products = products.products;
             searchState.totalPage = products.totalPage;
