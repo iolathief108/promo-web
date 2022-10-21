@@ -83,6 +83,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             variant1Qty: true,
             variant2Qty: true,
             variant1InStock: true,
+            description: true,
             variant2InStock: true,
             variant1Name: true,
             variant2Name: true,
