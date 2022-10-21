@@ -3,7 +3,8 @@
 
 .copywrite {
   position         : relative;
-  background-color : lighten(#000, 10%);
+  //background-color : lighten(#000, 10%);
+  background-color : $background-dark-color-primary;
   box-shadow: 0px -1px 5px #0000002e;
 
   a, p {
@@ -15,7 +16,7 @@
 .footer {
   // logo
   .logo {
-    width : 150px;
+    width : 220px;
 
     img {
       width : 100%;
@@ -38,7 +39,7 @@
 
   // payment methods
   .payment {
-    height : 27px;
+    height : 40px;
 
     img {
       height : 100%;
@@ -49,7 +50,8 @@
 
 .copy-bottom {
 
-  background-color : lighten(#000, 5%);
+  background-color : lighten($theme-color-red, 5%);
+  //background-color : lighten(#000, 5%);
   color            : darken(white, 5%);
 
 }

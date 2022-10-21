@@ -8,6 +8,7 @@ import {useSnapshot} from 'valtio';
 import frontState from '../states/front';
 import {useHasHydrated} from '../lib/utils';
 import Head from 'next/head';
+import React from 'react';
 
 
 const Contact: NextPage = () => {
@@ -45,14 +46,17 @@ const Contact: NextPage = () => {
                     </p>
                     <p>Or call us at:</p>
 
-                    <p><a href="tel:+94778580000">+94 77 858 0000</a></p>
+                    <p>
+                        <a href="tel:+94778580000">(+94) 11 347 4700</a><br/>
+                        <a href="tel:+94778580000">(+94) 77 858 0000</a>
+                    </p>
                     <p>We will get back to you as soon as possible. Thank you for your interest in Promo Solutions (Pvt) Ltd!</p>
 
-                    <h3>Adress</h3>
-                    <p>Address:
-                        No: 09,
-                        Joseph Lane,
-                        Colombo 04,
+                    <h3>Address</h3>
+                    <p>
+                        <b>Promo Solutions (Pvt) Ltd,</b><br/>
+                        St. Andrews Place, <br/>
+                        Colombo-15,<br/>
                         Sri Lanka.
                     </p>
                 </div>

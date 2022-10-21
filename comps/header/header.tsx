@@ -119,7 +119,7 @@ function RealHeader() {
                         </a>
                     </Link>
 
-                    <span className={'hotlink'}>HOTLINE: +94 77 858 0000</span>
+                    <span className={'hotlink'}>HOTLINE: (+94) 77 858 0000</span>
                     <Breadcrumb noRes={true}/>
                 </div>
             </div>

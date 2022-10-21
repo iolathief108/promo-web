@@ -69,10 +69,10 @@ export function Footer() {
                                     name: 'Gallery',
                                     href: '/gallery'
                                 },
-                                {
-                                    name: 'Privacy Policy',
-                                    href: '/privacy',
-                                }
+                                // {
+                                //     name: 'Privacy Policy',
+                                //     href: '/privacy',
+                                // }
                             ]}/>
                         </div>
 
@@ -81,9 +81,9 @@ export function Footer() {
                                 Office
                             </h5>
                             <p>
-                                No: 09, <br/>
-                                Joseph Lane, <br/>
-                                Colombo 04, <br/>
+                                <b>Promo Solutions (Pvt) Ltd,</b><br/>
+                                St. Andrews Place, <br/>
+                                Colombo-15,<br/>
                                 Sri Lanka.
                             </p>
                         </div>
@@ -97,13 +97,21 @@ export function Footer() {
                                 {/*</Link>*/}
                             </div>
                             <div className={'social mt-3'}>
-                                <span className={'me-2'}>Connect us: </span>
+
                                 <a className={'me-4'} href={'https://www.facebook.com/profile.php?id=100072962686354'} target={'_blank'}>
-                                    <i className="fab fa-facebook-f"/>
+                                    <img width={'100%'} style={{
+                                        maxWidth: '150px',
+                                    }} src={'/static/fb-logo.png'} alt={'facebook'}/>
+
                                 </a>
-                                <a className={'me-4'} href={'https://www.instagram.com/'} target={'_blank'}>
-                                    <i className="fab fa-instagram"/>
-                                </a>
+                                {/*<span className={'me-2'}>Find us on</span>*/}
+                                {/*<a className={'me-4'} href={'https://www.facebook.com/profile.php?id=100072962686354'} target={'_blank'}>*/}
+                                {/*    /!*<i className="fab fa-facebook-f"/>*!/*/}
+                                {/*    <b>Facebook</b>*/}
+                                {/*</a>*/}
+                                {/*<a className={'me-4'} href={'https://www.instagram.com/'} target={'_blank'}>*/}
+                                {/*    <i className="fab fa-instagram"/>*/}
+                                {/*</a>*/}
                                 {/*<a className={'me-3'} href={'https://www.twitter.com/'} target={'_blank'}>*/}
                                 {/*    <i className="fab fa-twitter"/>*/}
                                 {/*</a>*/}
@@ -135,7 +143,8 @@ function FooterBottom() {
                         <span>Promo Solutions (Pvt) Ltd
                             {/*&copy; */}
                             <span>&nbsp;</span>
-                            {new Date().getFullYear()},</span>
+                            {/*{new Date().getFullYear()},*/}
+                        </span>
                         <span>&nbsp;</span>
                         <span>All Rights Reserved</span>
                     </small>
