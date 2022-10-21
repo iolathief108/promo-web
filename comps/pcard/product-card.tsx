@@ -33,14 +33,15 @@ export function ProductCard({product}: Props) {
                         <p className={'mb-2'} style={{
                             lineHeight: '1.2rem',
                         }}>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci alias Lorem
-                            ipsum dolor sit amet, consectetur.
+                            {product.description}
+                            {/*Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci alias Lorem*/}
+                            {/*ipsum dolor sit amet, consectetur.*/}
                         </p>
-                        <p>
-                            Unit Price: 100 LKR
-                            <br/>
-                            Min Qty: 10
-                        </p>
+                        {/*<p>*/}
+                        {/*    Unit Price: 100 LKR*/}
+                        {/*    <br/>*/}
+                        {/*    Min Qty: 10*/}
+                        {/*</p>*/}
                     </div>
                 </div>
 
