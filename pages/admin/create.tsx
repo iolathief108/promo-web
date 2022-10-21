@@ -43,7 +43,7 @@ Min Qty: 10
 
 const productState = proxy<Interface>({
     categories: [],
-    name: createRandomName(),
+    name: '',
     variant1Name: '',
     variant1Price: 0,
     variant1InStock: true,
@@ -54,14 +54,14 @@ const productState = proxy<Interface>({
     variant2Qty: undefined,
     enabled: true,
     imageSrc: '',
-    description: getDescription(),
+    description: '',
 
     // remove
-    categoryId: getRandomNumber(),
+    categoryId: undefined,
 });
 
 function resetConfig() {
-    productState.name = createRandomName();
+    productState.name = '';
     productState.variant1Name = '';
     productState.variant1Price = 0;
     productState.variant1InStock = true;
@@ -70,10 +70,10 @@ function resetConfig() {
     productState.variant2Price = 0;
     productState.variant2InStock = true;
     productState.variant2Qty = undefined;
-    productState.categoryId = getRandomNumber();
+    productState.categoryId = undefined
     productState.enabled = true;
     productState.imageSrc = '';
-    productState.description = getDescription();
+    productState.description = '';
 }
 
 const Create: NextPage = ({product, pid}: {product?: Product & {image: Image}, pid?: number}) => {
