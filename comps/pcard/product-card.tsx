@@ -30,10 +30,17 @@ export function ProductCard({product}: Props) {
                         {/*<p>{*/}
                         {/*    getCategoryById(product.categoryId)?.name*/}
                         {/*}</p>*/}
-                        <p className={'mb-2'} style={{
+                        <p className={'mb-2 mt-1'} style={{
                             lineHeight: '1.2rem',
                         }}>
-                            {product.description}
+                            {
+                                product?.description?.split('\n').map((line, index) => (
+                                    <span key={index}>
+                                        {line}
+                                        <br/>
+                                    </span>
+                                ))
+                            }
                             {/*Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci alias Lorem*/}
                             {/*ipsum dolor sit amet, consectetur.*/}
                         </p>
