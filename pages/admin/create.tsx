@@ -1,12 +1,31 @@
 import type {NextPage, NextPageContext} from 'next';
 import AdminLayout from '../../layouts/admin';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Fetcher} from '../../lib/fetcher';
 import {Category, Image, Product} from '@prisma/client';
 import {proxy, useSnapshot} from 'valtio';
 import Router from 'next/router';
 import {prisma} from '../../prisma';
 import {apiBase} from '../../lib/config';
+import dynamic from 'next/dynamic';
+import {EditorProps} from 'react-draft-wysiwyg';
+// import htmlToDraft from 'html-to-draftjs';
+import draftToHtml from 'draftjs-to-html';
+
+// const htmlToDraft = dynamic(() => import('html-to-draftjs').then(
+//     mod => mod.default),
+//     {ssr: false});
+let htmlToDraft = null;
+if (typeof window === 'object') {
+    htmlToDraft = require('html-to-draftjs').default;
+}
+const Editor = dynamic<EditorProps>(
+    () => import('react-draft-wysiwyg').then((mod) => mod.Editor),
+    {ssr: false},
+);
+
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import {ContentState, convertToRaw, EditorState} from 'draft-js';
 
 
 interface Interface {
@@ -55,7 +74,7 @@ function resetConfig() {
     productState.variant2Price = 0;
     productState.variant2InStock = true;
     productState.variant2Qty = undefined;
-    productState.categoryId = undefined
+    productState.categoryId = undefined;
     productState.enabled = true;
     productState.imageSrc = '';
     productState.description = '';
@@ -75,6 +94,7 @@ const Create: NextPage = ({product, pid}: {product?: Product & {image: Image}, p
     const [loading, setLoading] = React.useState(false);
     const [success, setSuccess] = React.useState(false);
     const [desc, setDesc] = React.useState('');
+    const [editorState, setEditorState] = useState<any>(EditorState.createEmpty());
     const [error, setError] = React.useState<string>();
 
     const inputFileRef = React.useRef<HTMLInputElement | null>(null);
@@ -107,7 +127,10 @@ const Create: NextPage = ({product, pid}: {product?: Product & {image: Image}, p
             formData.append(key, JSON.stringify(theVal));
         });
         //add desc
-        formData.append('description', JSON.stringify({value: desc}));
+        // formData.append('description', JSON.stringify({value: desc}));
+        formData.append('description', JSON.stringify({
+            value: draftToHtml(convertToRaw(editorState.getCurrentContent()))
+        }));
 
 
         if (pid) {
@@ -195,6 +218,18 @@ const Create: NextPage = ({product, pid}: {product?: Product & {image: Image}, p
             productState.description = product?.description || '';
             setDesc(product?.description || '');
 
+            // wysiwyg
+            if (product?.description) {
+                const html = product.description;
+                // @ts-ignore
+                const contentBlock = htmlToDraft(html);
+                if (contentBlock) {
+                    const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+                    const editorState = EditorState.createWithContent(contentState);
+                    setEditorState(editorState);
+                }
+            }
+
             // init image
             if (product?.image) {
                 // random number between 10 to 100
@@ -204,6 +239,7 @@ const Create: NextPage = ({product, pid}: {product?: Product & {image: Image}, p
         }
 
     }, []);
+
 
     return (
         <AdminLayout>
@@ -276,9 +312,24 @@ const Create: NextPage = ({product, pid}: {product?: Product & {image: Image}, p
                     <div className={'row'}>
                         <h3 className={'mt-5'}>Description</h3>
                         <div className="col-12">
-                            <textarea name="description" id="description" cols={30} rows={10}
-                                        value={desc}
-                                        onChange={e => setDesc(e.target.value)}/>
+                            <Editor
+                                editorState={editorState as any}
+                                wrapperClassName="demo-wrapper"
+                                editorClassName="demo-editor"
+                                editorStyle={{
+                                    border: '1px solid #ccc',
+                                    minHeight: '13rem',
+                                    padding: '0.5rem',
+                                    borderRadius: '0.25rem',
+                                }}
+                                onEditorStateChange={(editorState) => {
+                                    setEditorState(editorState);
+                                    // setDesc(convertToRaw(editorState.getCurrentContent()));
+                                }}
+                            />
+                            {/*<textarea name="description" id="description" cols={30} rows={10}*/}
+                            {/*            value={desc}*/}
+                            {/*            onChange={e => setDesc(e.target.value)}/>*/}
                         </div>
                     </div>
 

@@ -27,27 +27,21 @@ export function ProductCard({product}: Props) {
 
                 <div className={'info col-6 col-sm-7 pe-3 ps-3'}>
                     <div className={'row'}>
-                        {/*<p>{*/}
-                        {/*    getCategoryById(product.categoryId)?.name*/}
-                        {/*}</p>*/}
-                        <p className={'mb-2 mt-1'} style={{
-                            lineHeight: '1.2rem',
-                        }}>
-                            {
-                                product?.description?.split('\n').map((line, index) => (
-                                    <span key={index}>
-                                        {line}
-                                        <br/>
-                                    </span>
-                                ))
-                            }
-                            {/*Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci alias Lorem*/}
-                            {/*ipsum dolor sit amet, consectetur.*/}
-                        </p>
-                        {/*<p>*/}
-                        {/*    Unit Price: 100 LKR*/}
-                        {/*    <br/>*/}
-                        {/*    Min Qty: 10*/}
+
+                        {/* dangerously set */}
+                        <div className={'description'} dangerouslySetInnerHTML={{__html: product.description || ''}}/>
+
+                        {/*<p className={'mb-2 mt-1'} style={{*/}
+                        {/*    lineHeight: '1.2rem',*/}
+                        {/*}}>*/}
+                            {/*{*/}
+                            {/*    product?.description?.split('\n').map((line, index) => (*/}
+                            {/*        <span key={index}>*/}
+                            {/*            {line}*/}
+                            {/*            <br/>*/}
+                            {/*        </span>*/}
+                            {/*    ))*/}
+                            {/*}*/}
                         {/*</p>*/}
                     </div>
                 </div>
