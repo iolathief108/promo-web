@@ -70,7 +70,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 // search: wordFirst,
                 search: search,
             } : undefined,
-            createdAt: search ? undefined : 'desc',
+            createdAt: search ? undefined : 'asc',
         },
         select: {
             name: true,
@@ -89,6 +89,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             variant2Name: true,
         },
     });
+
+    // soat products by variation 1 qty (desc)
+    products.sort((a, b) => {
+        const aQty = a.variant1Qty || 0;
+        const bQty = b.variant1Qty || 0;
+        return bQty - aQty;
+    });
+
 
     // cache control for 1 day
     res.setHeader('Cache-Control', 'maxage=86400, stale-while-revalidate');

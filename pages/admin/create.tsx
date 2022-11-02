@@ -282,10 +282,11 @@ const Create: NextPage = ({product, pid}: {product?: Product & {image: Image}, p
                         </div>
                     </div>
 
+                    {/* variation 1 Qty as Order (order) */}
                     <div className={'row mt-5'}>
                         <h3 className={'mt-5'}>Order (optional) </h3>
                         <div className="col">
-                            <label htmlFor="variant1Qty">Like Rank (Only available numbers are valid) 😎</label>
+                            <label htmlFor="variant1Qty">By default, the lease order is treated as having 0 😎</label>
                             <input type="number" name="Variant 1" id="variant1Qty"
                                    value={variant1Qty === undefined ? '' : `${variant1Qty}`}
                                    onChange={e => productState.variant1Qty = Number(e.target.value)}/>
