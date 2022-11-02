@@ -26,21 +26,6 @@ interface Interface {
     description?: string;
 }
 
-function createRandomName() {
-    return Math.random().toString(36).substring(7);
-}
-function getRandomNumber() {
-    // random number between 1 and 6
-    return Math.floor(Math.random() * 6) + 1;
-}
-function getDescription() {
-    return `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci alias Lorem ipsum dolor sit amet, consectetur.
-
-Unit Price: 100 LKR
-Min Qty: 10
-    `
-}
-
 const productState = proxy<Interface>({
     categories: [],
     name: '',
@@ -80,23 +65,16 @@ const Create: NextPage = ({product, pid}: {product?: Product & {image: Image}, p
 
     const {
         name,
-        variant1Name,
-        variant1Price,
-        variant1InStock,
-        variant1Qty,
-        variant2Name,
-        variant2Price,
-        variant2InStock,
-        variant2Qty,
         categoryId,
         enabled,
         imageSrc,
+        variant1Qty,
         categories,
-        description,
     } = useSnapshot(productState);
 
     const [loading, setLoading] = React.useState(false);
     const [success, setSuccess] = React.useState(false);
+    const [desc, setDesc] = React.useState('');
     const [error, setError] = React.useState<string>();
 
     const inputFileRef = React.useRef<HTMLInputElement | null>(null);
@@ -122,13 +100,21 @@ const Create: NextPage = ({product, pid}: {product?: Product & {image: Image}, p
             if (pid && key === 'imageSrc') {
                 return;
             }
+            if (key === 'description') {
+                return;
+            }
+
             formData.append(key, JSON.stringify(theVal));
         });
+        //add desc
+        formData.append('description', JSON.stringify({value: desc}));
+
 
         if (pid) {
             formData.append('pid', JSON.stringify({value: pid}));
             Fetcher.post('admin/create', formData).then(() => {
                 resetConfig();
+                setDesc('');
                 setLoading(false);
                 // redirect to products page
                 Router.push('/admin/products');
@@ -147,7 +133,7 @@ const Create: NextPage = ({product, pid}: {product?: Product & {image: Image}, p
             // post request
             Fetcher.post('admin/create', formData).then(e => {
                 setLoading(false);
-                console.log(e.data);
+                setDesc('');
                 resetConfig();
                 setSuccess(true);
 
@@ -207,6 +193,7 @@ const Create: NextPage = ({product, pid}: {product?: Product & {image: Image}, p
             productState.categoryId = product?.categoryId || undefined;
             productState.enabled = product?.enabled || true;
             productState.description = product?.description || '';
+            setDesc(product?.description || '');
 
             // init image
             if (product?.image) {
@@ -280,81 +267,28 @@ const Create: NextPage = ({product, pid}: {product?: Product & {image: Image}, p
                                     }
                                 </select>
                             </div>
+
+
                         </div>
                     </div>
 
-                    {/*<div className={'row'}>*/}
-                    {/*    <h3 className={'mt-5'}>Variant 1</h3>*/}
-                    {/*    <div className="col-3">*/}
-                    {/*        <label htmlFor="variant1Name">Name</label>*/}
-                    {/*        <input type="text" name="Variant 1" id="variant1Name" value={variant1Name || ''}*/}
-                    {/*               onChange={e => productState.variant1Name = e.target.value}/>*/}
-                    {/*    </div>*/}
-
-                    {/*    <div className="col-2">*/}
-                    {/*        <label htmlFor={'variant1Price'}>Price</label>*/}
-                    {/*        <input type="number" name="Variant 1" id={'variant1Price'} value={variant1Price || 0}*/}
-                    {/*               onChange={e => productState.variant1Price = Number(e.target.value)}/>*/}
-                    {/*    </div>*/}
-
-                    {/*    <div className={'col-2'}>*/}
-                    {/*        <label htmlFor="variant1Qty">Qty</label>*/}
-                    {/*        <input type="number" name="Variant 1" id="variant1Qty"*/}
-                    {/*               value={variant1Qty === undefined ? '' : `${variant1Qty}`}*/}
-                    {/*               onChange={e => productState.variant1Qty = Number(e.target.value)}/>*/}
-                    {/*    </div>*/}
-
-                    {/*    <div className="col-2 checkbox">*/}
-                    {/*        <label htmlFor="variant1InStock">Stock</label>*/}
-
-                    {/*        <input className={'checkbox'} type="checkbox" name="Variant 1" id="variant1InStock"*/}
-                    {/*               checked={variant1InStock || false}*/}
-                    {/*               onChange={e => productState.variant1InStock = e.target.checked}/>*/}
-                    {/*        /!*<input className={'checkbox'} type="checkbox" name="isEnabled" id="isEnabled" checked={enabled || false}*!/*/}
-                    {/*        /!*       onChange={e => configState.enabled = e.target.checked}/>*!/*/}
-                    {/*        <label htmlFor="variant1InStock">*/}
-                    {/*            {*/}
-                    {/*                // enabled ? 'Enabled' : 'Disabled'*/}
-                    {/*            }*/}
-                    {/*        </label>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                    {/*<div className={'row'}>*/}
-                    {/*    <h3 className={'mt-5'}>Variant 2</h3>*/}
-                    {/*    <div className="col-3">*/}
-                    {/*        <label htmlFor="variant2Name">Name</label>*/}
-                    {/*        <input type="text" name="Variant 2" id="variant2Name" value={variant2Name || ''}*/}
-                    {/*               onChange={e => productState.variant2Name = e.target.value}/>*/}
-                    {/*    </div>*/}
-
-                    {/*    <div className="col-2">*/}
-                    {/*        <label htmlFor={'variant2Price'}>Price</label>*/}
-                    {/*        <input type="number" name="Variant 2" id={'variant2Price'} value={variant2Price || 0}*/}
-                    {/*               onChange={e => productState.variant2Price = Number(e.target.value)}/>*/}
-                    {/*    </div>*/}
-
-                    {/*    <div className={'col-2'}>*/}
-                    {/*        <label htmlFor="variant2Qty">Qty</label>*/}
-                    {/*        <input type="number" name="Variant 2" id="variant2Qty"*/}
-                    {/*               value={variant2Qty === undefined ? '' : variant2Qty}*/}
-                    {/*               onChange={e => productState.variant2Qty = Number(e.target.value)}/>*/}
-                    {/*    </div>*/}
-
-                    {/*    <div className="col-2 checkbox">*/}
-                    {/*        <label htmlFor="variant2InStock">Stock</label>*/}
-                    {/*        <input className={'checkbox'} type="checkbox" name="Variant 2" id="variant2InStock"*/}
-                    {/*               checked={variant2InStock || false}*/}
-                    {/*               onChange={e => productState.variant2InStock = e.target.checked}/>*/}
-                    {/*        <label htmlFor="variant2InStock"/>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
 
                     <div className={'row'}>
                         <h3 className={'mt-5'}>Description</h3>
                         <div className="col-12">
                             <textarea name="description" id="description" cols={30} rows={10}
-                                        value={description || ''}
-                                        onChange={e => productState.description = e.target.value}/>
+                                        value={desc}
+                                        onChange={e => setDesc(e.target.value)}/>
+                        </div>
+                    </div>
+
+                    <div className={'row mt-5'}>
+                        <h3 className={'mt-5'}>Order (optional) </h3>
+                        <div className="col">
+                            <label htmlFor="variant1Qty">Like Rank (Only available numbers are valid) 😎</label>
+                            <input type="number" name="Variant 1" id="variant1Qty"
+                                   value={variant1Qty === undefined ? '' : `${variant1Qty}`}
+                                   onChange={e => productState.variant1Qty = Number(e.target.value)}/>
                         </div>
                     </div>
 

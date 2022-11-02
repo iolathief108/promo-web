@@ -234,38 +234,38 @@ const Settings: NextPage<{urls: {[key: string]: string}} & Props> = (props) => {
             <div className="container ms-0">
                 <h1>Settings</h1>
                 <form>
-                    <div className="form-group mt-3">
-                        <SettingTitle title={'Shipping Charge'}/>
-                        {/*number input */}
-                        <input style={{
-                            width: '200px',
-                        }} type={'number'} id="shippingCharge" placeholder="Shipping Charge" value={shippingCharge}
-                            // onChange={(e) => setShippingCharge((e.target.value))}
-                               onChange={(e) => setShippingCharge(parseFloat(e.target.value))}
-                        />
-                    </div>
+                    {/*<div className="form-group mt-3">*/}
+                    {/*    <SettingTitle title={'Shipping Charge'}/>*/}
+                    {/*    /!*number input *!/*/}
+                    {/*    <input style={{*/}
+                    {/*        width: '200px',*/}
+                    {/*    }} type={'number'} id="shippingCharge" placeholder="Shipping Charge" value={shippingCharge}*/}
+                    {/*        // onChange={(e) => setShippingCharge((e.target.value))}*/}
+                    {/*           onChange={(e) => setShippingCharge(parseFloat(e.target.value))}*/}
+                    {/*    />*/}
+                    {/*</div>*/}
 
-                    <div className="form-group mt-3 dod-set-cont">
-                        <SettingTitle title={'Deal of the Day'}/>
-                        <div className="content row">
-                            <ImageCol imageUrl={dod1Url} onChange={onSelectImage} name="dod1" ref={dod1}
-                                      text={dod1ProductId ? String(dod1ProductId) : ''}
-                                      onTextChange={(e) => Number(e.target.value) && setDod1ProductId(Number(e.target.value) || undefined)}
-                            />
-                            <ImageCol imageUrl={dod2Url} onChange={onSelectImage} name="dod2" ref={dod2}
-                                      text={dod2ProductId ? String(dod2ProductId) : ''}
-                                      onTextChange={(e) => Number(e.target.value) && setDod2ProductId(Number(e.target.value) || undefined)}
-                            />
-                            <ImageCol imageUrl={dod3Url} onChange={onSelectImage} name="dod3" ref={dod3}
-                                      text={dod3ProductId ? String(dod3ProductId) : ''}
-                                      onTextChange={(e) => Number(e.target.value) && setDod3ProductId(Number(e.target.value) || undefined)}
-                            />
-                            <ImageCol imageUrl={dod4Url} onChange={onSelectImage} name="dod4" ref={dod4}
-                                      text={dod4ProductId ? String(dod4ProductId) : ''}
-                                      onTextChange={(e) => Number(e.target.value) && setDod4ProductId(Number(e.target.value) || undefined)}
-                            />
-                        </div>
-                    </div>
+                    {/*<div className="form-group mt-3 dod-set-cont">*/}
+                    {/*    <SettingTitle title={'Deal of the Day'}/>*/}
+                    {/*    <div className="content row">*/}
+                    {/*        <ImageCol imageUrl={dod1Url} onChange={onSelectImage} name="dod1" ref={dod1}*/}
+                    {/*                  text={dod1ProductId ? String(dod1ProductId) : ''}*/}
+                    {/*                  onTextChange={(e) => Number(e.target.value) && setDod1ProductId(Number(e.target.value) || undefined)}*/}
+                    {/*        />*/}
+                    {/*        <ImageCol imageUrl={dod2Url} onChange={onSelectImage} name="dod2" ref={dod2}*/}
+                    {/*                  text={dod2ProductId ? String(dod2ProductId) : ''}*/}
+                    {/*                  onTextChange={(e) => Number(e.target.value) && setDod2ProductId(Number(e.target.value) || undefined)}*/}
+                    {/*        />*/}
+                    {/*        <ImageCol imageUrl={dod3Url} onChange={onSelectImage} name="dod3" ref={dod3}*/}
+                    {/*                  text={dod3ProductId ? String(dod3ProductId) : ''}*/}
+                    {/*                  onTextChange={(e) => Number(e.target.value) && setDod3ProductId(Number(e.target.value) || undefined)}*/}
+                    {/*        />*/}
+                    {/*        <ImageCol imageUrl={dod4Url} onChange={onSelectImage} name="dod4" ref={dod4}*/}
+                    {/*                  text={dod4ProductId ? String(dod4ProductId) : ''}*/}
+                    {/*                  onTextChange={(e) => Number(e.target.value) && setDod4ProductId(Number(e.target.value) || undefined)}*/}
+                    {/*        />*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
 
                     <div className="form-group mt-3 slider-set-cont">
                         <SettingTitle title={'Sliders'}/>
@@ -280,7 +280,7 @@ const Settings: NextPage<{urls: {[key: string]: string}} & Props> = (props) => {
                     </div>
 
                     <div className="form-group mt-3 banner-set-cont">
-                        <SettingTitle title={'Banners'}/>
+                        <SettingTitle title={'Long Banners'}/>
                         <div className="content row">
                             <ImageCol imageUrl={bannerAUrl} onChange={onSelectImage} name={'bannerA'} ref={bannerA}
                                       label={'Banner Large'}

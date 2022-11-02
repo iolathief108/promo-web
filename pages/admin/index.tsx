@@ -1,428 +1,242 @@
 import type {NextPage} from 'next';
+import type {Product} from '@prisma/client';
+import {Category} from '@prisma/client';
 import AdminLayout from '../../layouts/admin';
-import adminOrders, {
-    AdminOrderActions,
-    getAllOrderStatus,
-    getOrderStatus, getOrderTotal, isActionable, isRefundable,
-    nextStatusText,
-} from '../../states/admin-orders';
+import Link from 'next/link';
+import {useEffect, useState} from 'react';
+import {changePerPage} from '../../lib/config';
 import {useSnapshot} from 'valtio';
-import {useEffect, useRef, useState} from 'react';
-import moment from 'moment';
-import {OrderItem} from '@prisma/client';
-import {getImageUrl} from '../../lib/config';
-import {searchActions} from '../../states/search';
-import Popup from 'reactjs-popup';
-import {ResOrder} from '../../lib/fetcher';
-import {OrderDisplayItem, TheOrder} from '../../states/orders';
-import {formatPhoneNumber} from '../../lib/utils';
-import ReactToPrint from 'react-to-print';
+import {searchActions, searchState} from '../../states/search';
+import {Fetcher} from '../../lib/fetcher';
+import {getQuery} from '../../lib/utils';
+import {prisma} from '../../prisma';
+import frontState from '../../states/front';
 
 
-const Orders: NextPage = () => {
+const Admin: NextPage = (props: any) => {
+    const {products} = useSnapshot(searchState);
 
     useEffect(() => {
-        AdminOrderActions.init();
+        changePerPage(10);
+        searchActions.search({});
+
+        frontState.categories = props?.categories || [];
+
+        return () => {
+            searchActions.clear();
+            // changePerPage(5);
+        };
     }, []);
 
     return (
         <AdminLayout>
-            <div className="container admin-order ms-0">
-                <h1 className={'mb-2'}>Orders</h1>
 
-                <div>
-                    <FilterBar/>
-                    <OrdersTable/>
+            <div className="container admin-home ms-0">
+                <div className={'d-flex align-items-center'}>
+                    <h1 className={'mb-2'}>List of products</h1>
+                    <Link href="/admin/create">
+                        <a className={'ms-4'}>
+                            New product
+                        </a>
+                    </Link>
                 </div>
+                <SearchBox/>
+                <div className={'mb-4'}/>
+                <div className="bg-secondary bg-opacity-10 clearfix">
+                    {products?.map(product => (
+                        <ProductRow key={product.id} product={product}/>
+                    ))}
+                    {
+                        products?.length === 0 && (
+                            <div className={'text-center mt-2'}>
+                                <h1>No products found</h1>
+                            </div>
+                        )
+                    }
+                </div>
+                <Pagination/>
             </div>
         </AdminLayout>
     );
 };
 
-export default Orders;
-
-function FilterBar() {
-    return (
-        <div>
-            <OrderStatusFilter/>
-        </div>
-    );
-}
-
-function OrderStatusFilter() {
-    const onLinkClick = (e, statusKey) => {
-        e.preventDefault();
-        AdminOrderActions.filter(statusKey);
-    };
-    const {filter} = useSnapshot(adminOrders);
+const Pagination = () => {
+    const {totalPage, currentPage} = useSnapshot(searchState);
 
     return (
-        <div className={'filter'}>
-            <div className="row">
-                {
-                    getAllOrderStatus().map(status => (
-                        <div className={
-                            'col-sm-auto' + (status.value === filter ? ' active' : '')
-                        } key={status.value}>
-                            {
-                                <a onClick={e => onLinkClick(e, status.value)}>
-                                    {status.label}
-                                </a>
-                            }
-                        </div>
-                    ))
-                }
-            </div>
-        </div>
-    );
-}
-
-function OrdersTable() {
-    const {orders} = useSnapshot(adminOrders);
-
-    return (
-        <div>
-            <TableHead/>
-            {
-                orders.map(order => (
-                    <Order key={order.id} orderId={order.id}/>
-                ))
-            }
-            <Pagination/>
-        </div>
-    );
-}
-
-function Order({orderId}) {
-
-    const {orders} = useSnapshot(adminOrders);
-    const [order, setOrder] = useState<ResOrder>();
-    const [actionOpen, setActionOpen] = useState(false);
-    const orderDetailRef = useRef(null);
-
-    useEffect(() => {
-        // @ts-ignore
-        setOrder(orders.find(o => o.id === orderId));
-    }, [orders, orderId]);
-
-    if (!order) {
-        return null;
-    }
-
-    return (
-        <div className={'order'}>
-            <div className={'row'}>
-                <div className={'id'}>
-                    {order.id}
-                </div>
-                <div className={'name'}>
-                    <Popup
-                        className={'order-popup'}
-                        // defaultOpen={orderId === 30}
-                        trigger={
-                            <a className={'name-a'}>
-                                {order.firstName + ' ' + order.lastName}
-                            </a>
-                        } modal>
-                        <div>
-                            <div ref={orderDetailRef}>
-                                <OrderDetail order={new TheOrder(order)}/>
-                            </div>
-                            <ReactToPrint
-                                trigger={() => <a className={'ps-3 pb-2 d-inline-block fw-bold'}>PRINT OUT</a>}
-                                content={() => orderDetailRef.current}
-                            />
-                        </div>
-                    </Popup>
-                </div>
-                <div className={'date'}>
-                    {
-                        moment(order.createdAt).fromNow()
-                    }
-                </div>
-                <div className={'total'}>
-                    {getOrderTotal(order)}
-                </div>
-                <div className={'status'}>
-                    {getOrderStatus(order)}
-                </div>
-                <div className={'actions'}>
-                    <button disabled={!isActionable(order)} onClick={() => setActionOpen(!actionOpen)}>
-                        Action
-                        <div className={
-                            'action' + (actionOpen && isActionable(order) ? ' open' : '')
-                        }>
-                            {
-                                nextStatusText(order) ? (
-                                    <button onClick={() => AdminOrderActions.execute(order.id)}>
-                                        {nextStatusText(order)?.label}
-                                    </button>
-                                ) : null
-                            }
-                            {
-                                order.orderStatus !== 'cancelled' ? (
-                                    <button className={'bg-danger text-white'}
-                                            onClick={() => AdminOrderActions.cancel(order.id)}>
-                                        Cancel
-                                    </button>
-                                ) : null
-                            }
-                            {
-                                isRefundable(order) && (
-                                    <button className={'bg-warning text-white'}
-                                            onClick={() => AdminOrderActions.refund(order.id)}>
-                                        Refund
-                                    </button>
-                                )
-                            }
-
-                            <div onClick={() => {
-                                setActionOpen(false);
-                            }} className={'alpha'}/>
-                        </div>
-                    </button>
-                </div>
-            </div>
-            {/*<ProductList items={order.items}/>*/}
-        </div>
-    );
-}
-
-function TableHead() {
-    return (
-        <div className={'table-head'}>
-            <div className={'row'}>
-                <div className={'id'}>
-                    ID
-                </div>
-                <div className={'name'}>
-                    Name
-                </div>
-                <div className={'date'}>
-                    Date
-                </div>
-                <div className={'total'}>
-                    Total
-                </div>
-                <div className={'status'}>
-                    Status
-                </div>
-                <div className={'actions'}>
-                    Actions
-                </div>
-            </div>
-        </div>
-    );
-}
-
-function Pagination() {
-    const {currentPage, totalPage} = useSnapshot(adminOrders);
-
-    const handleClick = (e, page) => {
-        e.preventDefault();
-        AdminOrderActions.paginate(page);
-    };
-
-    return (
-
         <div className={'pagination mb-6 mt-5 align-center d-flex justify-content-center'}>
             {currentPage > 1 && (
-                <button className={'btn btn-primary'} onClick={() => AdminOrderActions.prevPage()}>
+                <button className={'btn btn-primary'} onClick={() => searchActions.prevPage()}>
                     Previous
                 </button>
             )}
             {Array.from({length: totalPage}, (_, i) => (
                 <button className={'btn btn-primary '
                 + (currentPage === i + 1 ? 'active' : '')
-                } onClick={() => AdminOrderActions.paginate(i + 1)} key={i}>
+                } onClick={() => searchActions.paginate(i + 1)} key={i}>
                     {i + 1}
                 </button>
             ))}
             {currentPage < totalPage && (
-                <button className={'btn btn-primary'} onClick={() => AdminOrderActions.nextPage()}>
+                <button className={'btn btn-primary'} onClick={() => searchActions.nextPage()}>
                     Next
                 </button>
             )}
         </div>
-
     );
-}
+};
 
-function ProductList(props: {items: (OrderItem & {product: {imageId: number} | null})[]}) {
-
-
+const SingleVariant = (props: any) => {
     return (
-        <div className={'item-list'}>
-            <div className="row">
-                {
-                    props.items.map(item => (
-                        <>
-                            {
-                                item.variant1Qty > 0 && (
-                                    <Product key={`${item.id}v1`} variationName={item.variant1Name}
-                                             qty={item.variant1Qty}
-                                             imageId={item.product?.imageId}
-                                    />
-                                )
-                            }
-                            {
-                                item.variant2Qty > 0 && (
-                                    <Product key={`${item.id}v2`} variationName={item.variant2Name}
-                                             qty={item.variant2Qty}
-                                             imageId={item.product?.imageId}
-                                    />
-                                )
-                            }
-                        </>
-                    ))
-                }
-            </div>
-        </div>
-    );
-}
-
-function Product(props: {variationName: string, imageId?: number, qty: number}) {
-    return (
-        <div className={'item col-auto'}>
-            <div className="qty">
-                {
-                    props.qty + 'x'
-                }
-            </div>
-            <div className={'image'}>
-                {
-                    props.imageId && (
-                        <img src={getImageUrl(props.imageId)} alt={props.variationName}/>
-                    )
-                }
-                {
-                    props.variationName && (
-                        <div className={'var-name text-center'}>
-                            {props.variationName}
-                        </div>
-                    )
-                }
-            </div>
-            {/*{*/}
-            {/*    props.item && props.item.product?.imageId && (*/}
-            {/*        <img src={*/}
-            {/*            getImageUrl(props.item.product?.imageId)*/}
-            {/*        } alt={props.item.name}/>*/}
-            {/*    )*/}
-            {/*}*/}
-        </div>
-    );
-}
-
-function OrderDetail({order}: {order: TheOrder}) {
-
-    const Summary = () => {
-
-        return (
-            <div className={'summary'}>
-                <h4>Summary</h4>
-                {/*<span className={'d-block'}>Order ID: {order.id}</span>*/}
-                <span className={'order-time opacity-50'}>
-                    Placed on {moment(order.order.createdAt).format('MMM DD, YYYY hh:mm a')}
+        <div className={'variant ' + props.className}>
+            {/*<div className="name">{props.title}</div>*/}
+            <div className={'d-flex align-items-center'}>
+                <span className={'pe-0 d-inline-block'}>
+                    {
+                        props.stock ? <input type={'checkbox'} checked={true} disabled={true}/> :
+                            <input type={'checkbox'} disabled={true}/>
+                    }
                 </span>
-
-                <div className={'mt-4'}>
-                    <div className={'d-flex justify-content-between'}>
-                        <span>Subtotal</span>
-                        <span>SGD {order.subtotal}</span>
-                    </div>
-                    <div className={'d-flex justify-content-between'}>
-                        <span>Shipping</span>
-                        <span>SGD {order.order.deliveryFee}</span>
-                    </div>
-                    <div className={'border-line mb-2'}/>
-                    <div className={'d-flex justify-content-between'}>
-                        <span>Total</span>
-                        <span className={'fw-bolder'}>SGD {order.total}</span>
-                    </div>
-                </div>
+                <span className={'fw-bold ms-2' + ` ${props.qty === 0 && 'text-danger'}`}>
+                    {props.qty}
+                    {props.qty === null && '∞'}
+                </span>
+                <span className={'ps-0 offset-1'}>{props.name}</span>
+                <span className={'offset-1'}>SGD {props.price}</span>
+                {/*<span>{props.stock ? 'In Stock' : 'Out of Stock'}</span>*/}
             </div>
-        );
+        </div>
+    );
+};
+
+const ProductRow = ({product}: {product: Product & {imageId: number}}) => {
+
+    const [deleted, setDeleted] = useState(false);
+
+    const onDelete = async (e) => {
+        // prevent default action
+        e.preventDefault();
+
+        // delete product
+        if (window.confirm('Are you sure you want to delete this product?')) {
+            const res = await Fetcher.get('/admin/delete?id=' + product.id);
+            if (res.status === 200) {
+                setDeleted(true);
+            }
+        }
+
     };
 
-    const Address = () => {
-        return (
-            <div className={'address'}>
-                <h4>Address</h4>
-                <p>{order.name}</p>
-                <p>
-                    {order.address.addrLine1}{order.address.addrLine2 && ','} {order.address.addrLine2}<br/>
-                    {order.address.city}, {order.address.state}<br/> {order.address.zip}
-                </p>
-                <p>{formatPhoneNumber(order.phone)}</p>
-            </div>
-        );
-    };
+    if (deleted) {
+        return null;
+    }
 
-    const Items = () => {
-        return (
-            <div className={'value'}>
-                <h4>Items</h4>
+    return (
+        <div className={'clearfix product-card align-items-center row py-3 mx-2  mb-3 border-bottom'}>
+            <div className={'col-1'}>{product.id}</div>
+            <div className={'image col-1'}>
+                <img className={'rounded-2 shadow'} src={`/api/im/${product.imageId}`} alt={product.name}/>
+            </div>
+            <div className={'col-2 align-middle name fw-bolder'}>{product.name}</div>
+            <SingleVariant className={'col-3'} title={'Type 1'} name={product.variant1Name}
+                           price={product.variant1Price} stock={product.variant1InStock} qty={product.variant1Qty}/>
+            <SingleVariant className={'col-3 p-0'} title={'Type 2'} name={product.variant2Name}
+                           price={product.variant2Price} stock={product.variant2InStock} qty={product.variant2Qty}/>
+            <div className={'col-1'}>
                 {
-                    order.items.map((item, index) => (
-                        <TheOrderItem key={`${index}-${item.productName}-${item.varName}`} item={item}/>
+                    product.enabled ? <input type={'checkbox'} checked={true} disabled={true}/> :
+                        <input type={'checkbox'} disabled={true}/>
+                }
+            </div>
+            <div className={'col-1'}>
+                <Link href={`/admin/edit/${product.id}`}> Edit </Link>
+                <a className={'text-danger fw-bold mt-2 d-inline-block'} onClick={onDelete}> Delete </a>
+            </div>
+            {/*<div className={'col-1 offset-1'}>*/}
+            {/*</div>*/}
+        </div>
+    );
+};
+
+const SearchBox = () => {
+
+    const [searchText, setSearchText] = useState(searchState.search.keywords);
+    const {search} = useSnapshot(searchState);
+    const {categories} = useSnapshot(frontState);
+
+    const onSearch = () => {
+        searchActions.search(getQuery({key: searchText}));
+    };
+
+    const onCategoryChange = (slug) => {
+        searchActions.search(getQuery({cat: slug}));
+    };
+
+    return (
+        <div>
+            <div className={'d-inline-flex position-relative'}>
+                <input onKeyDown={
+                    (e) => {
+                        if (e.key === 'Enter') {
+                            onSearch();
+                        }
+                    }
+                }
+                       className={'search-box'} placeholder={'Search for more products'} type="text" value={searchText}
+                       onChange={(e) => setSearchText(e.target.value)}/>
+
+                {
+                    searchText && search.keywords && (
+                        <button onClick={() => {
+                            searchActions.search(getQuery({key: ''}));
+                            setSearchText('');
+                        }} className={'text-danger position-absolute'} style={{
+                            top: '30%',
+                            right: '0',
+                            border: 'none',
+                            background: 'transparent',
+                            boxShadow: 'none',
+                            padding: '0',
+                            paddingRight: '0.5rem',
+                        }}>
+                            <i className={'fa fa-times'}/>
+                        </button>
+                    )
+                }
+            </div>
+
+            <a onClick={e => {
+                e.preventDefault();
+                onSearch();
+            }} className={'search-btn'}>
+                Search
+            </a>
+
+            <div className={'mt-3'}>
+                {
+                    categories.map(category => (
+                        <a key={category.id} className={'btn btn-primary me-3'
+                        + (search.categorySlug === category.slug ? ' text-danger text-decoration-underline' : '')
+                        } onClick={() => {
+                            onCategoryChange(category.slug);
+                        }}>{category.name}</a>
                     ))
                 }
             </div>
-        );
+
+        </div>
+    );
+};
+
+export default Admin;
+
+export const getServerSideProps = async () => {
+
+    const categories: Category[] = await prisma.category.findMany();
+
+    return {
+        props: {
+            categories,
+        },
     };
-
-    return (
-        <div className={'container or-det-cont px-4 pt-4 pb-3'}>
-            <h2>Order # {order.id}</h2>
-
-            <div className={'row '}>
-                <div className={'frame col-6 p-3'}>
-                    <Summary/>
-                </div>
-                <div className={'frame frame-2 flex-grow-1 p-3'}>
-                    <Address/>
-                </div>
-            </div>
-
-            <div className={'frame frame-3 row pt-3 mb-2'}>
-                <Items/>
-            </div>
-        </div>
-    );
-}
-
-
-const TheOrderItem = ({item}: {item: OrderDisplayItem}) => {
-    return (
-        <div className="order-item row py-2">
-            <div className={'col-2'}>
-                {
-                    item.imageId &&
-                    <img style={{
-                        width: '100%',
-                        objectFit: 'contain',
-                    }}
-                         src={getImageUrl(item.imageId)} alt={item.productName}/>
-                }
-            </div>
-            <div className={'col-3'}>
-                <div className={'pr-name'}>{item.productName}</div>
-                <span className={'var-name opacity-50'}>{item.varName}</span>
-            </div>
-            <div className="col-3">
-                <p>SGD {item.varPrice}
-                    <br/> <span className={'opacity-50'}>Qty:</span> {item.varQty}</p>
-            </div>
-            <div className="col-1">
-                <input style={{
-                    transform: 'scale(1.3)',
-                }} type={'checkbox'}/>
-            </div>
-            <div className="col-auto fw-bold ms-auto text-end">
-                {/*<p>SGD {item.varPrice}</p>*/}
-                <p>SGD {item.varPrice * item.varQty}</p>
-            </div>
-        </div>
-    );
 };

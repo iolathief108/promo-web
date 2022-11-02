@@ -225,13 +225,18 @@ const ListItem = ({id}: {id: number}) => {
                 maxWidth: 500,
             }}>
                 <div className={'col-auto'}>
+                    <span className={'me-3'}>
+                    ({item?.productCount || 0})
+                    </span>
                     {
                         item?.imageUrl &&
                         <img width={'70px'} src={item?.imageUrl}/>
                     }
                 </div>
                 <span className={'col-6'} style={{}}>
-                    ({item?.productCount || 0}) {item?.name} {item?.id}
+                    {/*({item?.productCount || 0}) */}
+                    {item?.name}
+                    {/*{item?.id}*/}
                 </span>
                 <div className={'col-auto'}>
                     {

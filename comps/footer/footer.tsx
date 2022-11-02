@@ -102,8 +102,9 @@ export function Footer() {
                                     <img width={'100%'} style={{
                                         maxWidth: '150px',
                                     }} src={'/static/fb-logo-white.png'} alt={'facebook'}/>
-
                                 </a>
+                                
+
                                 {/*<span className={'me-2'}>Find us on</span>*/}
                                 {/*<a className={'me-4'} href={'https://www.facebook.com/profile.php?id=100072962686354'} target={'_blank'}>*/}
                                 {/*    /!*<i className="fab fa-facebook-f"/>*!/*/}
