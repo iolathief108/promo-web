@@ -25,7 +25,7 @@ export function ProductCard({product}: Props) {
                     </div>
                 </div>
 
-                <div className={'info col-6 col-sm-7 pe-3 ps-3'}>
+                <div className={'info col-6 col-sm pe-3 ps-3'}>
                     <div className={'row'}>
 
                         {/* dangerously set */}
@@ -34,22 +34,23 @@ export function ProductCard({product}: Props) {
                         {/*<p className={'mb-2 mt-1'} style={{*/}
                         {/*    lineHeight: '1.2rem',*/}
                         {/*}}>*/}
-                            {/*{*/}
-                            {/*    product?.description?.split('\n').map((line, index) => (*/}
-                            {/*        <span key={index}>*/}
-                            {/*            {line}*/}
-                            {/*            <br/>*/}
-                            {/*        </span>*/}
-                            {/*    ))*/}
-                            {/*}*/}
+                        {/*{*/}
+                        {/*    product?.description?.split('\n').map((line, index) => (*/}
+                        {/*        <span key={index}>*/}
+                        {/*            {line}*/}
+                        {/*            <br/>*/}
+                        {/*        </span>*/}
+                        {/*    ))*/}
+                        {/*}*/}
                         {/*</p>*/}
                     </div>
                 </div>
 
-                <div className={'contact col-12 col-sm-2 pe-0 ps-0'} style={{
+                {/*<div className={'contact col-12 col-sm-2 pe-0 ps-0'} style={{*/}
+                <div className={'contact col-12 col-sm-2 pe-sm-0 ps-sm-0'} style={{
                     marginLeft: '-10px',
                     marginRight: '-10px',
-                    width: '18%',
+                    // width: '18%',
                 }}>
                     <form style={{
                         // maxWidth: '130px',
@@ -100,6 +101,26 @@ export function ProductCard({product}: Props) {
                     </form>
                 </div>
             </div>
+
+            <style jsx>
+                {`
+                  @media ( max-width: 576px ) {
+                    .contact {
+                      margin-left: 0 !important;
+                      margin-right: 0 !important;
+                      padding-left: 15px !important;
+                      padding-right: 15px !important;
+                      margin-top: 20px;
+                    }
+
+                    button {
+                      padding-top: 10px;
+                      padding-bottom: 10px;
+                      font-weight: 600;
+                    }
+                  }
+                `}
+            </style>
         </div>
     );
 }

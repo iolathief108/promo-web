@@ -135,6 +135,11 @@
     &::placeholder {
       opacity : 0.5;
     }
+
+    @media (max-width : 767px) {
+      font-size : 1.1rem;
+      border: 1px solid $theme-color-red;
+    }
   }
 
   .search-btn {

@@ -134,7 +134,9 @@ export const searchActions = {
                 searchState.totalPage = totalPage1;
                 searchState.currentPage = 0;
 
-                pro[0].isFirst = true;
+                if (pro.length > 0) {
+                    pro[0].isFirst = true;
+                }
 
                 products = pro;
                 totalPage = totalPage1;

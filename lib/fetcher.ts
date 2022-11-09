@@ -4,8 +4,13 @@ import {Order, OrderItem, Product, User} from '@prisma/client';
 import {useEffect, useState} from 'react';
 
 
+// export const Fetcher = axios.create({
+//     baseURL: isDevelopment ? `http://localhost:${devPort}${apiBase}` : apiBase,
+//     timeout: 80000,
+// });
+
 export const Fetcher = axios.create({
-    baseURL: isDevelopment ? `http://localhost:${devPort}${apiBase}` : apiBase,
+    baseURL: isDevelopment ? `http://192.168.8.238:${devPort}${apiBase}` : apiBase,
     timeout: 80000,
 });
 
