@@ -27,7 +27,14 @@ export const cartCalc = derive({
         if (cart.length === 0) {
             return '0';
         }
-        const A = cart?.reduce((acc, item) => acc + item.product.variant1Price * item.v1Qty + item.product.variant2Price * item.v2Qty, 0);
+        const A = cart?.reduce((acc, item) => {
+            // if product is null, return 0
+            if (item.product === null || !item.product) {
+                return 0;
+            }
+            // @ts-ignore
+            return acc + item.product.variant1Price * item.v1Qty + item.product.variant2Price * item.v2Qty;
+        }, 0);
         return numberToMoney(A);
     },
 });
@@ -43,6 +50,7 @@ export const getCartTotal = (cart: CartItem[]) => {
     if (!cartA) {
         return 0;
     }
+    // @ts-ignore
     return cartA?.reduce((acc, item) => acc + item.product.variant1Price * item.v1Qty + item.product.variant2Price * item.v2Qty, 0);
 };
 
@@ -61,7 +69,6 @@ export const cartActions = {
         }
         const cart = [...(cartState.cart || [])];
         const index = cart.findIndex(item => item.product.id === product.id);
-
 
 
         if (index === -1) {

@@ -28,3 +28,16 @@ ZOHO_USER="user"
 ZOHO_PASS="pass"
 NEW_ORDER_EMAIL="xxx@gmail.com"
 ENV="development" or "staging" or "production"
+
+
+
+brands
+running in home
+
+product chat should do the whatsapp
+
+
+our staff separte pg
+in top menu
+
+

@@ -1,6 +1,6 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
 import {getSession} from '../../../lib/session';
-import {isDevelopment, isProduction, isStaging} from '../../../lib/config';
+import {isProduction} from '../../../lib/config';
 
 
 export default async function handler(
@@ -12,6 +12,7 @@ export default async function handler(
     await getSession(req, res);
 
     if (req.method === 'POST') {
+        console.log('d');
         //check name and password in body
         const username = req.body.username || 'user';
         const password = req.body.password;

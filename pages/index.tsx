@@ -2,9 +2,7 @@ import type {NextPage} from 'next';
 import {Header} from '../comps/header/header';
 import {Cats} from '../comps/cats/cats';
 import {HomeSlider} from '../comps/slider/hero-slider';
-import {Dod} from '../comps/dod/dod';
 import {useEffect} from 'react';
-import {Category} from '@prisma/client';
 import frontState, {getCategoryById, initFrontState} from '../states/front';
 import {getImageUrl} from '../lib/config';
 import 'slick-carousel/slick/slick.css';
@@ -15,13 +13,14 @@ import InfiniteScroll from 'react-infinite-scroller';
 import {searchActions, searchState} from '../states/search';
 import {ProductCard} from '../comps/pcard/product-card';
 import {useSnapshot} from 'valtio';
-import {getQuery, useHasHydrated} from '../lib/utils';
+import {useHasHydrated} from '../lib/utils';
 import pageState from '../states/page';
 import {Loader} from '../comps/loader';
 import profileState, {profileActions} from '../states/profile';
 import {CartSummery} from '../comps/cartsum/cart-summery';
 import {getDod, getFrontDocs, getSliders, TFrontDocs} from '../lib/fetcher';
 import {prisma} from '../prisma';
+import {LogoSlider} from '../comps/logo-slider/logo-slider';
 
 
 type Props = {
@@ -101,6 +100,7 @@ const Home: NextPage<Props> = (props) => {
                         (mainBannerLoaded || noDodLoaded > 3) && (
                             <>
                                 <CartSummery/>
+                                <LogoSlider/>
 
                                 {/*<h2 className={'text-center'}>Products</h2>*/}
                                 <InfiniteScroll

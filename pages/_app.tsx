@@ -20,6 +20,8 @@ import 'reactjs-popup/dist/index.css';
 import {useEffect} from 'react';
 import {useRouter} from 'next/router';
 import frontState from '../states/front';
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 
 import 'react-image-lightbox/style.css';
 

@@ -10,7 +10,7 @@ import {useEffect, useState} from 'react';
 // });
 
 export const Fetcher = axios.create({
-    baseURL: isDevelopment ? `http://192.168.8.238:${devPort}${apiBase}` : apiBase,
+    baseURL: isDevelopment ? `http://192.168.8.187:${devPort}${apiBase}` : apiBase,
     timeout: 80000,
 });
 

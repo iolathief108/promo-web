@@ -14,6 +14,8 @@ interface Interface {
         id?: number;
     }[];
 
+    logoUrls: string[];
+
     windowHeight: number;
     windowWidth: number;
 
@@ -43,6 +45,8 @@ const frontState = proxy<Interface>({
     sliderImageUrls: [],
     dods: [],
 
+    logoUrls: [],
+
     isBgVisible: false,
     bgWidth: 0,
 
@@ -64,6 +68,7 @@ const frontState = proxy<Interface>({
 
 export function initFrontState(fdata: TFrontDocs) {
     frontState.categories = fdata?.cats || [];
+    // frontState.
     frontState.sliderImageUrls = fdata.sliders?.map(s => getImageUrl(s.imageId)) || [];
     frontState.dods = fdata?.dods?.map(d => ({
         imageUrl: getImageUrl(d.imageId),
